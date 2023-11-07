@@ -69,7 +69,16 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack_Front",
+                    "name": "Attack_Lef",
+                    "type": "Button",
+                    "id": "50718db0-354e-43cf-b688-f649e208cf2c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack_Rig",
                     "type": "Button",
                     "id": "807de504-a970-486b-bf9c-667d5df25df2",
                     "expectedControlType": "Button",
@@ -109,28 +118,6 @@
                     "action": "Move",
                     "isComposite": true,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "7b0d5c3c-d5de-4964-82de-1ed7ab8c4aac",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "d31649f7-062c-4726-8cea-621b0c602b29",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "left",
@@ -266,45 +253,12 @@
                 },
                 {
                     "name": "One Modifier",
-                    "id": "78d71beb-d7e7-49a3-b5f1-b5600c9d42a7",
-                    "path": "OneModifier",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack_Front",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier",
-                    "id": "eec76f78-eacc-421a-a131-001e776f30d9",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack_Front",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "binding",
-                    "id": "016245cb-a7de-4d12-97c2-40d66db51047",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack_Front",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "One Modifier",
                     "id": "d7d60c75-65c6-4dde-af39-eadbed4b651a",
                     "path": "OneModifier",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack_Front",
+                    "action": "Attack_Rig",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -315,7 +269,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack_Front",
+                    "action": "Attack_Rig",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -326,7 +280,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack_Front",
+                    "action": "Attack_Rig",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -340,6 +294,39 @@
                     "action": "Attack_Ultimate",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "78d71beb-d7e7-49a3-b5f1-b5600c9d42a7",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack_Lef",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "eec76f78-eacc-421a-a131-001e776f30d9",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack_Lef",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "016245cb-a7de-4d12-97c2-40d66db51047",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack_Lef",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },

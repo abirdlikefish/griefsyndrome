@@ -91,7 +91,16 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Attack_Front"",
+                    ""name"": ""Attack_Lef"",
+                    ""type"": ""Button"",
+                    ""id"": ""50718db0-354e-43cf-b688-f649e208cf2c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack_Rig"",
                     ""type"": ""Button"",
                     ""id"": ""807de504-a970-486b-bf9c-667d5df25df2"",
                     ""expectedControlType"": ""Button"",
@@ -131,28 +140,6 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""7b0d5c3c-d5de-4964-82de-1ed7ab8c4aac"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""d31649f7-062c-4726-8cea-621b0c602b29"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
@@ -288,45 +275,12 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""One Modifier"",
-                    ""id"": ""78d71beb-d7e7-49a3-b5f1-b5600c9d42a7"",
-                    ""path"": ""OneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack_Front"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""eec76f78-eacc-421a-a131-001e776f30d9"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack_Front"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""binding"",
-                    ""id"": ""016245cb-a7de-4d12-97c2-40d66db51047"",
-                    ""path"": ""<Keyboard>/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack_Front"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""One Modifier"",
                     ""id"": ""d7d60c75-65c6-4dde-af39-eadbed4b651a"",
                     ""path"": ""OneModifier"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Attack_Front"",
+                    ""action"": ""Attack_Rig"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -337,7 +291,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Attack_Front"",
+                    ""action"": ""Attack_Rig"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -348,7 +302,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Attack_Front"",
+                    ""action"": ""Attack_Rig"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -362,6 +316,39 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""action"": ""Attack_Ultimate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""78d71beb-d7e7-49a3-b5f1-b5600c9d42a7"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack_Lef"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""eec76f78-eacc-421a-a131-001e776f30d9"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack_Lef"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""016245cb-a7de-4d12-97c2-40d66db51047"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack_Lef"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -416,7 +403,8 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         m_GamePlay_Attack_Heavy = m_GamePlay.FindAction("Attack_Heavy", throwIfNotFound: true);
         m_GamePlay_Attack_Up = m_GamePlay.FindAction("Attack_Up", throwIfNotFound: true);
         m_GamePlay_Attack_Down = m_GamePlay.FindAction("Attack_Down", throwIfNotFound: true);
-        m_GamePlay_Attack_Front = m_GamePlay.FindAction("Attack_Front", throwIfNotFound: true);
+        m_GamePlay_Attack_Lef = m_GamePlay.FindAction("Attack_Lef", throwIfNotFound: true);
+        m_GamePlay_Attack_Rig = m_GamePlay.FindAction("Attack_Rig", throwIfNotFound: true);
         m_GamePlay_Attack_Ultimate = m_GamePlay.FindAction("Attack_Ultimate", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -487,7 +475,8 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Attack_Heavy;
     private readonly InputAction m_GamePlay_Attack_Up;
     private readonly InputAction m_GamePlay_Attack_Down;
-    private readonly InputAction m_GamePlay_Attack_Front;
+    private readonly InputAction m_GamePlay_Attack_Lef;
+    private readonly InputAction m_GamePlay_Attack_Rig;
     private readonly InputAction m_GamePlay_Attack_Ultimate;
     public struct GamePlayActions
     {
@@ -500,7 +489,8 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         public InputAction @Attack_Heavy => m_Wrapper.m_GamePlay_Attack_Heavy;
         public InputAction @Attack_Up => m_Wrapper.m_GamePlay_Attack_Up;
         public InputAction @Attack_Down => m_Wrapper.m_GamePlay_Attack_Down;
-        public InputAction @Attack_Front => m_Wrapper.m_GamePlay_Attack_Front;
+        public InputAction @Attack_Lef => m_Wrapper.m_GamePlay_Attack_Lef;
+        public InputAction @Attack_Rig => m_Wrapper.m_GamePlay_Attack_Rig;
         public InputAction @Attack_Ultimate => m_Wrapper.m_GamePlay_Attack_Ultimate;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
@@ -532,9 +522,12 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @Attack_Down.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Down;
                 @Attack_Down.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Down;
                 @Attack_Down.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Down;
-                @Attack_Front.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Front;
-                @Attack_Front.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Front;
-                @Attack_Front.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Front;
+                @Attack_Lef.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Lef;
+                @Attack_Lef.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Lef;
+                @Attack_Lef.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Lef;
+                @Attack_Rig.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Rig;
+                @Attack_Rig.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Rig;
+                @Attack_Rig.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Rig;
                 @Attack_Ultimate.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Ultimate;
                 @Attack_Ultimate.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Ultimate;
                 @Attack_Ultimate.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Ultimate;
@@ -563,9 +556,12 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @Attack_Down.started += instance.OnAttack_Down;
                 @Attack_Down.performed += instance.OnAttack_Down;
                 @Attack_Down.canceled += instance.OnAttack_Down;
-                @Attack_Front.started += instance.OnAttack_Front;
-                @Attack_Front.performed += instance.OnAttack_Front;
-                @Attack_Front.canceled += instance.OnAttack_Front;
+                @Attack_Lef.started += instance.OnAttack_Lef;
+                @Attack_Lef.performed += instance.OnAttack_Lef;
+                @Attack_Lef.canceled += instance.OnAttack_Lef;
+                @Attack_Rig.started += instance.OnAttack_Rig;
+                @Attack_Rig.performed += instance.OnAttack_Rig;
+                @Attack_Rig.canceled += instance.OnAttack_Rig;
                 @Attack_Ultimate.started += instance.OnAttack_Ultimate;
                 @Attack_Ultimate.performed += instance.OnAttack_Ultimate;
                 @Attack_Ultimate.canceled += instance.OnAttack_Ultimate;
@@ -615,7 +611,8 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         void OnAttack_Heavy(InputAction.CallbackContext context);
         void OnAttack_Up(InputAction.CallbackContext context);
         void OnAttack_Down(InputAction.CallbackContext context);
-        void OnAttack_Front(InputAction.CallbackContext context);
+        void OnAttack_Lef(InputAction.CallbackContext context);
+        void OnAttack_Rig(InputAction.CallbackContext context);
         void OnAttack_Ultimate(InputAction.CallbackContext context);
     }
     public interface IUIActions
