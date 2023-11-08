@@ -34,12 +34,12 @@ public class EventManager : MonoBehaviour
 // instance
     private static EventManager instance ;
     public static EventManager Instance { get {return instance;}  private set{instance = value;} }
-    public InputReader inputReader;
+    // public InputReader inputReader;
     private void Awake() 
     {
         if(Instance == null)
         {
-            inputReader.Initialization();
+            // inputReader.Initialization();
             Instance = this;
         }
         else

@@ -7,14 +7,30 @@ using UnityEngine.InputSystem;
 [CreateAssetMenu(fileName = "InputReader", menuName = "ScriptableObjects/InputReader", order = 1)]
 public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInput.IUIActions
 {
-    public int test ;
+    public static InputReader Instance { get; private set; }
     private GameInput m_gameInput;
 
-    public void Initialization()
+    // public void Initialization()
+    // {
+    //     if(m_gameInput == null)
+    //     {
+    //         m_gameInput = new GameInput();
+    //         m_gameInput.GamePlay.SetCallbacks(this);
+    //         m_gameInput.UI.SetCallbacks(this);
+    //         UseGamePlayAction();
+    //     }
+    // }
+
+    // public InputReader()
+    private void OnEnable()
     {
+        Debug.Log("scriptable object constructor");
+        if(Instance == null)
+        {
+            Instance = this;
+        }
         if(m_gameInput == null)
         {
-Debug.Log("InputReader Initialization");
             m_gameInput = new GameInput();
             m_gameInput.GamePlay.SetCallbacks(this);
             m_gameInput.UI.SetCallbacks(this);

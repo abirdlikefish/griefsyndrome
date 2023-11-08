@@ -7,6 +7,12 @@ public class Homura : PlayerBase
 {
 
 // initialization
+
+    public override void Initialization()
+    {
+        base.Initialization();
+        rigidbody2D.gravityScale = HomuraIntelligence.Instance.gravityScale;
+    }
     protected override void InitializeState()
     {
         State_Jump = new Homura_Jump(this);
@@ -51,10 +57,12 @@ public class Homura : PlayerBase
     
     public override void MoveEvent(Vector2 input)
     {
+        MoveTrend = input.x > 0 ? 1 : -1;
         if(ActionLevel >= 1 && IsMove == false)
         {
             return ;
         }
+
         if(input.sqrMagnitude < 0.1f)
         {
             Debug.LogError("MoveEvent Input is " + input.ToString());
@@ -67,80 +75,191 @@ public class Homura : PlayerBase
         {
             IsFaceRig = true;
         }
+
         StateMachine.ChangeState(State_Move);
-        Debug.Log("MoveEvent");
     }
     public override void Move_CanceledEvent(Vector2 input)
     {
+        MoveTrend = 0;
         if(IsMove == false)
         {
             return ;
         }
         IsChargeOver = true;
-        Debug.Log("Move_CanceledEvent");
     }
     public override void JumpEvent()
     {
-        Debug.Log("JumpEvent");
+        if(ActionLevel >= 5 )
+        {
+            return ;
+        }
+        if(JumpTimeLeft <= 0)
+        {
+            return;
+        }
+        StateMachine.ChangeState(State_Jump);
     }
     public override void Jump_CanceledEvent()
     {
-        Debug.Log("Jump_CanceledEvent");
+        if(IsJump == false)
+        {
+            return ;
+        }
+        IsChargeOver = true;
     }
     public override void Attack_LightEvent()
     {
-        Debug.Log("Attack_LightEvent");
+        if(ActionTimeLeft <= 0)
+        {
+            return;
+        }
+        if(IsAttack_Light && Combo < MaxCombo)
+        {
+            PreInput = true;
+            return;
+        }
+        if(ActionLevel >= 2)
+        {
+            return ;
+        }
+        StateMachine.ChangeState(State_Attack_Light);
     }
     public override void Attack_Light_CanceledEvent()
     {
-        Debug.Log("Attack_Light_CanceledEvent");
+        if(IsAttack_Light == false)
+        {
+            return;
+        }
+        IsChargeOver = true;
     }
     public override void Attack_HeavyEvent()
     {
-        Debug.Log("Attack_HeavyEvent");
+        if(ActionTimeLeft <= 0)
+        {
+            return;
+        }
+        if(ActionLevel >= 3)
+        {
+            return ;
+        }
+        StateMachine.ChangeState(State_Attack_Heavy);
     }
     public override void Attack_Heavy_CanceledEvent()
     {
-        Debug.Log("Attack_Heavy_CanceledEvent");
-    }
-    public override void Attack_UpEvent()
-    {
-        Debug.Log("Attack_UpEvent");
-    }
-    public override void Attack_Up_CanceledEvent()
-    {
-        Debug.Log("Attack_Up_CanceledEvent");
-    }
-    public override void Attack_DownEvent()
-    {
-        Debug.Log("Attack_DownEvent");
-    }
-    public override void Attack_Down_CanceledEvent()
-    {
-        Debug.Log("Attack_Down_CanceledEvent");
+        if(IsAttack_Heavy == false)
+        {
+            return;
+        }
+        IsChargeOver = true;
     }
     public override void Attack_LefEvent()
     {
-        Debug.Log("Attack_LefEvent");
+        if(ActionTimeLeft <= 0)
+        {
+            return;
+        }
+        if(ActionLevel >= 4)
+        {
+            return ;
+        }
+        StateMachine.ChangeState(State_Attack_Lef);
+        // Debug.Log("Attack_LefEvent");
     }
     public override void Attack_Lef_CanceledEvent()
     {
-        Debug.Log("Attack_Lef_CanceledEvent");
+        if(IsAttack_Lef == false)
+        {
+            return ;
+        }
+        IsChargeOver = true;
+        // Debug.Log("Attack_Lef_CanceledEvent");
     }
     public override void Attack_RigEvent()
     {
-        Debug.Log("Attack_RigEvent");
+        if(ActionTimeLeft <= 0)
+        {
+            return;
+        }
+        if(ActionLevel >= 4)
+        {
+            return ;
+        }
+        StateMachine.ChangeState(State_Attack_Rig);
+        // Debug.Log("Attack_RigEvent");
     }
     public override void Attack_Rig_CanceledEvent()
     {
-        Debug.Log("Attack_Rig_CanceledEvent");
+        if(IsAttack_Rig == false)
+        {
+            return ;
+        }
+        IsChargeOver = true;
+        // Debug.Log("Attack_Rig_CanceledEvent");
+    }
+    public override void Attack_UpEvent()
+    {
+        if(ActionTimeLeft <= 0)
+        {
+            return;
+        }
+        if(ActionLevel >= 4)
+        {
+            return ;
+        }
+        StateMachine.ChangeState(State_Attack_Up);
+        // Debug.Log("Attack_UpEvent");
+    }
+    public override void Attack_Up_CanceledEvent()
+    {
+        if(IsAttack_Up == false)
+        {
+            return ;
+        }
+        IsChargeOver = true;
+        // Debug.Log("Attack_Up_CanceledEvent");
+    }
+    public override void Attack_DownEvent()
+    {
+        if(ActionTimeLeft <= 0)
+        {
+            return;
+        }
+        if(ActionLevel >= 4)
+        {
+            return ;
+        }
+        StateMachine.ChangeState(State_Attack_Down);
+        // Debug.Log("Attack_DownEvent");
+    }
+    public override void Attack_Down_CanceledEvent()
+    {
+        if(IsAttack_Down == false)
+        {
+            return ;
+        }
+        IsChargeOver = true;
+        // Debug.Log("Attack_Down_CanceledEvent");
     }
     public override void Attack_UltimateEvent()
     {
-        Debug.Log("Attack_UltimateEvent");
+        if(ActionTimeLeft <= 0)
+        {
+            return;
+        }
+        if(ActionLevel >= 5)
+        {
+            return ;
+        }
+        StateMachine.ChangeState(State_Attack_Ultimate);
+        // Debug.Log("Attack_UltimateEvent");
     }
     public override void Attack_Ultimate_CanceledEvent()
     {
-        Debug.Log("Attack_Ultimate_CanceledEvent");
+        if(IsAttack_Ultimate == false)
+        {
+            return ;
+        }
+        IsChargeOver = true;
+        // Debug.Log("Attack_Ultimate_CanceledEvent");
     }
 }

@@ -22,6 +22,10 @@ public interface IPlayerState
     public int ActionLevel { get; set; }
     public int Combo { get; set; }
     public int MaxCombo { get; set; }
+    public int MoveTrend { get; set; }
+    public int JumpTimeLeft { get; set; }
+    public int ActionTimeLeft { get; set; }
+    public bool PreInput { get; set; }
     public bool IsChargeOver { get; set; }
     public bool IsOnGround { get; set; }
     public bool IsNearWall { get; set; }

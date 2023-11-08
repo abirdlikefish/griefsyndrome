@@ -22,8 +22,39 @@ public class PlayerBase : MonoBehaviour, IPlayerState , IPlayerComponent
     public int ActionLevel { get { return m_actionLevel; } set { m_actionLevel = value; } }
 
     [SerializeField]
+    protected int m_jumpTimeLeft;
+    public int JumpTimeLeft { get { return m_jumpTimeLeft;} set { m_jumpTimeLeft = value; } }
+
+    [SerializeField]
+    protected int m_actionTimeLeft;
+    public int ActionTimeLeft { get { return m_actionTimeLeft; } set { m_actionTimeLeft = value; } }
+
+    [SerializeField]
+    protected bool m_preInput;
+    public bool PreInput { get { return m_preInput; } set { m_preInput = value; } }
+
+    [SerializeField]
     protected bool m_isChargeOver;
     public bool IsChargeOver { get { return m_isChargeOver; } set { m_isChargeOver = value; } }
+
+    [SerializeField]
+    protected int m_moveTrend;
+    public int MoveTrend 
+    {
+        get 
+        {
+            if(IsFaceRig && m_moveTrend < 0)
+            {
+                IsFaceRig = false;
+            }
+            else if(!IsFaceRig && m_moveTrend > 0)
+            {
+                IsFaceRig = true;
+            }
+            return m_moveTrend;
+        } 
+        set { m_moveTrend = value ;} 
+    }
 
     [SerializeField]
     protected bool m_isFaceRig;
@@ -58,16 +89,15 @@ public class PlayerBase : MonoBehaviour, IPlayerState , IPlayerComponent
             RaycastHit2D mid ;
             float position_y = -0.4f;
             LayerMask layerMask = (1 << 8);
-            for(float position_x = -0.2f ; position_x <= 0.2f ; position_x += 0.1f)
+            for(float position_x = -0.15f ; position_x <= 0.15f ; position_x += 0.1f)
             {
                 Vector2 midPosition = new Vector2(position_x + transform.position.x , position_y + transform.position.y ) ;
-                mid = Physics2D.Raycast(midPosition , Vector2.down , 0.11f , layerMask);
+                mid = Physics2D.Raycast(midPosition , Vector2.down , 0.12f , layerMask);
                 if(mid)
                 {
                     m_isOnGround = true;
                     return true;
                 }
-        Debug.Log(midPosition.ToString());
             }
             m_isOnGround = false;
             return false;
@@ -163,8 +193,12 @@ public class PlayerBase : MonoBehaviour, IPlayerState , IPlayerComponent
         m_combo = 0;
         m_maxCombo = 0;
         m_actionLevel = 0;
+        m_moveTrend = 0;
+        m_jumpTimeLeft = 0;
+        m_actionTimeLeft = 1;
+        m_preInput = false;
         m_isChargeOver = false;
-        m_isOnGround = false;
+        m_isFaceRig = true;
         m_isNearWall = false;
         m_isJump = false;
         m_isMove = false;

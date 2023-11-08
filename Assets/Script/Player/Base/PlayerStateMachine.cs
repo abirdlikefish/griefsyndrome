@@ -16,7 +16,7 @@ public class PlayerStateMachine
         this.m_playerState.ExitState();
         this.m_playerState = playerState;
         this.m_playerState.EnterState();
-Debug.Log("change state");
+// Debug.Log("change state");
     }
 
     public void Initialization(PlayerStateBase playerState)

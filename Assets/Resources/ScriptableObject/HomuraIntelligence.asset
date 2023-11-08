@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 776c483e9075b544ca1c8ecdbf1eb667, type: 3}
+  m_Name: HomuraIntelligence
+  m_EditorClassIdentifier: 
+  gravityScale: 1
+  jumpHeight: 1.5
+  moveSpeed: {x: 3, y: 0}
+  maxJumpTime: 2
+  maxActionTime: 1
+  recoil_GRP: {x: -1, y: 0}
+  recoil_handgun: {x: 0, y: 0}
+  recoil_minimi: {x: -0.1, y: 0}
+  recoil_mortar: {x: 0, y: 0}
+  recoil_granade: {x: -1, y: 1}
+  recoil_granade_front: {x: 1, y: 1}
+  gravityScale_GPR: 0
+  gravityScale_handgun: 0
+  gravityScale_minimi: 0.1
+  gravityScale_mortar: 1
+  gravityScale_granade: 1
+  gravityScale_granade_front: 1
