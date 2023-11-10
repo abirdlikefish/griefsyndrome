@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f33c8558357e449885d0f1382d840, type: 3}
   m_Name: GlobalSetting
   m_EditorClassIdentifier: 
+  coyoteTime: 0.2
+  difficulty: 0

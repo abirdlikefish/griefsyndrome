@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776c483e9075b544ca1c8ecdbf1eb667, type: 3}
   m_Name: HomuraIntelligence
   m_EditorClassIdentifier: 
-  gravityScale: 1
-  jumpHeight: 4
+  gravityScale: 3
+  jumpHeight: 2
   moveSpeed: {x: 2, y: 0}
   maxJumpTime: 2
   maxActionTime: 1
@@ -26,3 +26,59 @@ MonoBehaviour:
   actionLevel_idle: 0
   actionLevel_airIdle: 1
   actionLevel_jump: 5
+  handgun:
+    actionLevel: 2
+    gravityScale: 0
+    maxCombo: 5
+    beginSpeed: {x: 0, y: 0}
+    recoil: {x: 0, y: 0}
+    animationName: Homura_handGun
+    animationName_air: Homura_handGunAir
+  RPG:
+    actionLevel: 4
+    gravityScale: 0
+    maxCombo: 1
+    beginSpeed: {x: 0, y: 0}
+    recoil: {x: -1, y: 0}
+    animationName: Homura_RPG
+    animationName_air: Homura_RPGair
+  minimi:
+    actionLevel: 3
+    gravityScale: 0.1
+    maxCombo: 10
+    beginSpeed: {x: 0, y: 0}
+    recoil: {x: -0.1, y: 0}
+    animationName: Homura_minimiB
+    animationName_air: Homura_minimi
+  mortar:
+    actionLevel: 4
+    gravityScale: 0
+    maxCombo: 1
+    beginSpeed: {x: 0, y: 0}
+    recoil: {x: 0, y: 0}
+    animationName: Homura_mortar
+    animationName_air: Homura_mortar
+  granade:
+    actionLevel: 4
+    gravityScale: 1
+    maxCombo: 1
+    beginSpeed: {x: -1, y: 1}
+    recoil: {x: 0, y: 0}
+    animationName: Homura_granade
+    animationName_air: Homura_granadeAir
+  granade_front:
+    actionLevel: 4
+    gravityScale: 1
+    maxCombo: 1
+    beginSpeed: {x: 1, y: 1}
+    recoil: {x: 0, y: 0}
+    animationName: Homura_granadeB
+    animationName_air: Homura_granadeB
+  timeFreeze:
+    actionLevel: 5
+    gravityScale: 0
+    maxCombo: 1
+    beginSpeed: {x: 0, y: 0}
+    recoil: {x: 0, y: 0}
+    animationName: Homura_mortar
+    animationName_air: Homura_mortar
