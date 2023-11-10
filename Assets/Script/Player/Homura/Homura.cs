@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Homura : PlayerBase
+public class Homura : PlayerBase , IHomuraAnimationEvent
 {
 
 // initialization
@@ -34,7 +35,7 @@ public class Homura : PlayerBase
         StateMachine = new PlayerStateMachine(this);
         StateMachine.Initialization(State_Idle);
     }
-    //
+// update
     protected override void Update()
     {
         base.Update();
@@ -45,7 +46,23 @@ public class Homura : PlayerBase
         base.FixedUpdate();
     }
 
-    // input event
+// animation event
+    public void AnimationEvent_End()
+    {
+        StateMachine.ChangeState( IsOnGround ? State_Idle : State_AirIdle);
+    }
+    public void AnimationEvent_Fire()
+    {
+        Fire?.Invoke();
+    }
+    public void AnimationEvent_AfterFire()
+    {
+        ReShoot?.Invoke();
+    }
+    public Action Fire{get ; set ; }
+    public Action ReShoot{get ; set ; }
+
+// input event
     public override void PauseEvent()
     {
         Debug.Log("PauseEvent");
@@ -163,7 +180,6 @@ public class Homura : PlayerBase
             return ;
         }
         StateMachine.ChangeState(State_Attack_Lef);
-        // Debug.Log("Attack_LefEvent");
     }
     public override void Attack_Lef_CanceledEvent()
     {
@@ -172,7 +188,6 @@ public class Homura : PlayerBase
             return ;
         }
         IsChargeOver = true;
-        // Debug.Log("Attack_Lef_CanceledEvent");
     }
     public override void Attack_RigEvent()
     {
@@ -185,7 +200,6 @@ public class Homura : PlayerBase
             return ;
         }
         StateMachine.ChangeState(State_Attack_Rig);
-        // Debug.Log("Attack_RigEvent");
     }
     public override void Attack_Rig_CanceledEvent()
     {
@@ -194,7 +208,6 @@ public class Homura : PlayerBase
             return ;
         }
         IsChargeOver = true;
-        // Debug.Log("Attack_Rig_CanceledEvent");
     }
     public override void Attack_UpEvent()
     {
@@ -207,7 +220,6 @@ public class Homura : PlayerBase
             return ;
         }
         StateMachine.ChangeState(State_Attack_Up);
-        // Debug.Log("Attack_UpEvent");
     }
     public override void Attack_Up_CanceledEvent()
     {
@@ -216,7 +228,6 @@ public class Homura : PlayerBase
             return ;
         }
         IsChargeOver = true;
-        // Debug.Log("Attack_Up_CanceledEvent");
     }
     public override void Attack_DownEvent()
     {
@@ -229,7 +240,6 @@ public class Homura : PlayerBase
             return ;
         }
         StateMachine.ChangeState(State_Attack_Down);
-        // Debug.Log("Attack_DownEvent");
     }
     public override void Attack_Down_CanceledEvent()
     {
@@ -238,7 +248,6 @@ public class Homura : PlayerBase
             return ;
         }
         IsChargeOver = true;
-        // Debug.Log("Attack_Down_CanceledEvent");
     }
     public override void Attack_UltimateEvent()
     {
@@ -251,7 +260,6 @@ public class Homura : PlayerBase
             return ;
         }
         StateMachine.ChangeState(State_Attack_Ultimate);
-        // Debug.Log("Attack_UltimateEvent");
     }
     public override void Attack_Ultimate_CanceledEvent()
     {
@@ -260,6 +268,5 @@ public class Homura : PlayerBase
             return ;
         }
         IsChargeOver = true;
-        // Debug.Log("Attack_Ultimate_CanceledEvent");
     }
 }

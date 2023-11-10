@@ -4,64 +4,48 @@ using UnityEngine;
 
 public class Homura_Attack_Down : PlayerStateBase
 {
+    protected IHomuraAnimationEvent m_IHomuraAnimationEvent;
     public Homura_Attack_Down(PlayerBase playerBase) : base(playerBase)
     {
-        m_animationName.Add("Homura_granade");
-        m_animationName.Add("Homura_granadeAir");
+        m_IHomuraAnimationEvent = playerBase as Homura;
     }
 
     public override void EnterState()
     {
         base.EnterState();
         m_IplayerState.Combo = 1;
-        m_IplayerState.MaxCombo = 1;
+        m_IplayerState.MaxCombo = HomuraIntelligence.Instance.granade.maxCombo;
         m_IplayerState.IsChargeOver = false;
-        m_IplayerState.ActionLevel = 4;
-        m_IplayerState.IsAttack_Down = true;
+        m_IplayerState.ActionLevel = HomuraIntelligence.Instance.granade.actionLevel;
+        m_IplayerState.IsAttack_Up = true;
         if(m_IplayerState.MoveTrend == 0){}
-        m_IplayerComponent.rigidbody2D.velocity = Vector2.zero;
-        m_IplayerComponent.rigidbody2D.gravityScale = 0;
-        if(m_IplayerState.IsOnGround)
-        {
-            m_animationNameIndex = 0;
-        }
-        else
-        {
-            m_animationNameIndex = 1;
-        }
-        m_IplayerComponent.animator.Play(m_animationName[m_animationNameIndex]);
+        m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.granade.beginSpeed * (m_IplayerState.IsFaceRig ? 1 : -1) ;
+        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.granade.gravityScale;
+        Debug.Log(m_IplayerState.IsOnGround ? HomuraIntelligence.Instance.granade.animationName : HomuraIntelligence.Instance.granade.animationName_air);
+        m_IplayerComponent.animator.Play( m_IplayerState.IsOnGround ? HomuraIntelligence.Instance.granade.animationName : HomuraIntelligence.Instance.granade.animationName_air);
+        m_IHomuraAnimationEvent.Fire += this.Fire;
     }
 
     public override void ExitState()
     {
-        m_IplayerComponent.rigidbody2D.gravityScale = 1;
-        m_IplayerState.IsAttack_Down = false;
+        m_IplayerState.IsAttack_Up = false;
         m_IplayerState.ActionTimeLeft --;
+        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.gravityScale;
+        m_IHomuraAnimationEvent.Fire -= this.Fire;
         base.ExitState();
     }
+
     public override void Update()
     {
-        if(!m_IplayerComponent.animator.GetCurrentAnimatorStateInfo(0).IsName(m_animationName[m_animationNameIndex]))
-        {
-            return;
-        }
         base.Update();
-        float midNormalizedTime = m_IplayerComponent.animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        if(midNormalizedTime >= 1.0f)
-        {
-            if(m_IplayerState.IsOnGround)
-            {
-                m_IplayerState.StateMachine.ChangeState(m_IplayerState.State_Idle);
-            }
-            else
-            {
-                m_IplayerState.StateMachine.ChangeState(m_IplayerState.State_AirIdle);
-            }
-        }
     }
 
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+    }
+    public void Fire()
+    {
+        Debug.Log("Fire");
     }
 }

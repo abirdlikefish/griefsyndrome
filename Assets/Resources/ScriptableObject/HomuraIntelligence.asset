@@ -13,19 +13,16 @@ MonoBehaviour:
   m_Name: HomuraIntelligence
   m_EditorClassIdentifier: 
   gravityScale: 1
-  jumpHeight: 1.5
-  moveSpeed: {x: 3, y: 0}
+  jumpHeight: 4
+  moveSpeed: {x: 2, y: 0}
   maxJumpTime: 2
   maxActionTime: 1
-  recoil_GRP: {x: -1, y: 0}
-  recoil_handgun: {x: 0, y: 0}
-  recoil_minimi: {x: -0.1, y: 0}
-  recoil_mortar: {x: 0, y: 0}
-  recoil_granade: {x: -1, y: 1}
-  recoil_granade_front: {x: 1, y: 1}
-  gravityScale_GPR: 0
-  gravityScale_handgun: 0
-  gravityScale_minimi: 0.1
-  gravityScale_mortar: 1
-  gravityScale_granade: 1
-  gravityScale_granade_front: 1
+  animationName_move: Homura_run
+  animationName_idle: Homura_stand
+  animationName_airIdle: Homura_airIdle
+  animationName_jump: Homura_jump
+  animationName_airJump: Homura_airJump
+  actionLevel_move: 1
+  actionLevel_idle: 0
+  actionLevel_airIdle: 1
+  actionLevel_jump: 5

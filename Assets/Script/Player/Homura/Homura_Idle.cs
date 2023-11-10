@@ -6,7 +6,7 @@ public class Homura_Idle : PlayerStateBase
 {
     public Homura_Idle(PlayerBase playerBase) : base(playerBase)
     {
-        m_animationName.Add("Homura_stand");
+        // m_animationName.Add("Homura_stand");
     }
 
     public override void EnterState()
@@ -14,8 +14,8 @@ public class Homura_Idle : PlayerStateBase
         base.EnterState();
         m_IplayerState.IsChargeOver = false;
         m_IplayerState.IsIdle = true;
-        m_IplayerState.ActionLevel = 0;
-        m_IplayerComponent.animator.Play(m_animationName[0]);
+        m_IplayerState.ActionLevel = HomuraIntelligence.Instance.actionLevel_idle;
+        m_IplayerComponent.animator.Play(HomuraIntelligence.Instance.animationName_idle );
         m_IplayerState.JumpTimeLeft = HomuraIntelligence.Instance.maxJumpTime;
         m_IplayerState.ActionTimeLeft = HomuraIntelligence.Instance.maxActionTime;
     }

@@ -4,73 +4,58 @@ using UnityEngine;
 
 public class Homura_Attack_Heavy : PlayerStateBase
 {
+    protected IHomuraAnimationEvent m_IHomuraAnimationEvent;
+    private int shootMode ;
     private int[] m_frameCnt = {11 , 12};
     public Homura_Attack_Heavy(PlayerBase playerBase) : base(playerBase)
     {
-        m_animationName.Add("Homura_minimiB");
-        m_animationName.Add("Homura_minimi");
+        m_IHomuraAnimationEvent = playerBase as Homura;
     }
 
     public override void EnterState()
     {
         base.EnterState();
         m_IplayerState.Combo = 1;
-        m_IplayerState.MaxCombo = 10;
+        m_IplayerState.MaxCombo = HomuraIntelligence.Instance.minimi.maxCombo;
         m_IplayerState.IsChargeOver = false;
-        m_IplayerState.ActionLevel = 3;
+        m_IplayerState.ActionLevel = HomuraIntelligence.Instance.minimi.actionLevel;
         m_IplayerState.IsAttack_Heavy = true;
-        
-        m_IplayerComponent.rigidbody2D.velocity = Vector2.zero;
-        m_IplayerComponent.rigidbody2D.gravityScale = 0.1f;
-
-        if(m_IplayerState.IsOnGround)
-        {
-            m_animationNameIndex = 0;
-        }
-        else
-        {
-            m_animationNameIndex = 1;
-        }
-        m_IplayerComponent.animator.Play(m_animationName[m_animationNameIndex]);
+        m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.minimi.beginSpeed;
+        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.minimi.gravityScale;
+        m_IplayerComponent.animator.Play( m_IplayerState.IsOnGround ? HomuraIntelligence.Instance.minimi.animationName : HomuraIntelligence.Instance.minimi.animationName_air);
+        shootMode = m_IplayerState.IsOnGround ? 0 : 1;
+        m_IHomuraAnimationEvent.Fire += this.Fire;
+        m_IHomuraAnimationEvent.ReShoot += this.ReShoot;
     }
     public override void ExitState()
     {
-        m_IplayerComponent.rigidbody2D.gravityScale = 1;
         m_IplayerState.IsAttack_Heavy = false;
         m_IplayerState.ActionTimeLeft --;
+        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.gravityScale;
+        m_IHomuraAnimationEvent.Fire -= this.Fire;
+        m_IHomuraAnimationEvent.ReShoot -= this.ReShoot;
         base.ExitState();
     }
 
     public override void Update()
     {
-        if(!m_IplayerComponent.animator.GetCurrentAnimatorStateInfo(0).IsName(m_animationName[m_animationNameIndex]))
-        {
-            return;
-        }
         base.Update();
-        float midNormalizedTime = m_IplayerComponent.animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        if(midNormalizedTime >= 1.0f)
+
+    }
+
+    public void Fire()
+    {
+        Debug.Log("Fire");
+    }
+    public void ReShoot()
+    {
+        // Debug.Log("ReShoot: " + shootMode.ToString());
+        if(m_IplayerState.Combo < m_IplayerState.MaxCombo && !m_IplayerState.IsChargeOver)
         {
-            if(m_IplayerState.IsOnGround)
-            {
-                m_IplayerState.StateMachine.ChangeState(m_IplayerState.State_Idle);
-            }
-            else
-            {
-                m_IplayerState.StateMachine.ChangeState(m_IplayerState.State_AirIdle);
-            }
-        }
-        else if(midNormalizedTime >= 8.9f / m_frameCnt[m_animationNameIndex] )
-        {
-            if(m_IplayerState.Combo >= m_IplayerState.MaxCombo || m_IplayerState.IsChargeOver)
-            {
-                return ;
-            }
-            m_IplayerComponent.animator.Play( m_animationName[m_animationNameIndex], 0 , 6.0f / m_frameCnt[m_animationNameIndex]);    
+            m_IplayerComponent.animator.Play( shootMode == 0 ? HomuraIntelligence.Instance.minimi.animationName : HomuraIntelligence.Instance.minimi.animationName_air, 0 , 6.0f / m_frameCnt[shootMode]);
             m_IplayerState.Combo ++;
         }
     }
-
     public override void FixedUpdate()
     {
         base.FixedUpdate();

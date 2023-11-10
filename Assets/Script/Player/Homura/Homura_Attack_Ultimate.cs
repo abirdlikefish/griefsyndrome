@@ -4,59 +4,43 @@ using UnityEngine;
 
 public class Homura_Attack_Ultimate : PlayerStateBase
 {
+    protected IHomuraAnimationEvent m_IHomuraAnimationEvent;
     public Homura_Attack_Ultimate(PlayerBase playerBase) : base(playerBase)
     {
-        m_animationName.Add("Homura_mortar");
+        m_IHomuraAnimationEvent = playerBase as Homura;
     }
 
     public override void EnterState()
     {
         base.EnterState();
         m_IplayerState.Combo = 1;
-        m_IplayerState.MaxCombo = 1;
+        m_IplayerState.MaxCombo = HomuraIntelligence.Instance.timeFreeze.maxCombo;
         m_IplayerState.IsChargeOver = false;
-        m_IplayerState.ActionLevel = 5;
+        m_IplayerState.ActionLevel = HomuraIntelligence.Instance.timeFreeze.actionLevel;
         m_IplayerState.IsAttack_Ultimate = true;
         if(m_IplayerState.MoveTrend == 0){}
-        m_IplayerComponent.rigidbody2D.velocity = Vector2.zero;
-        m_IplayerComponent.rigidbody2D.gravityScale = 0;
-        if(m_IplayerState.IsOnGround)
-        {
-            m_animationNameIndex = 0;
-        }
-        else
-        {
-            m_animationNameIndex = 1;
-        }
-        m_IplayerComponent.animator.Play(m_animationName[m_animationNameIndex]);
+        m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.timeFreeze.beginSpeed * (m_IplayerState.IsFaceRig ? 1 : -1) ;
+        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.timeFreeze.gravityScale;
+        m_IplayerComponent.animator.Play( m_IplayerState.IsOnGround ? HomuraIntelligence.Instance.timeFreeze.animationName : HomuraIntelligence.Instance.timeFreeze.animationName_air);
+        m_IHomuraAnimationEvent.Fire += this.Fire;
     }
 
     public override void ExitState()
     {
-        m_IplayerComponent.rigidbody2D.gravityScale = 1;
+        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.gravityScale;
         m_IplayerState.IsAttack_Ultimate = false;
         m_IplayerState.ActionTimeLeft --;
+        m_IHomuraAnimationEvent.Fire -= this.Fire;
         base.ExitState();
     }
+    public void Fire()
+    {
+        Debug.Log("Fire");
+    }
+
     public override void Update()
     {
-        if(!m_IplayerComponent.animator.GetCurrentAnimatorStateInfo(0).IsName(m_animationName[m_animationNameIndex]))
-        {
-            return;
-        }
         base.Update();
-        float midNormalizedTime = m_IplayerComponent.animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        if(midNormalizedTime >= 1.0f)
-        {
-            if(m_IplayerState.IsOnGround)
-            {
-                m_IplayerState.StateMachine.ChangeState(m_IplayerState.State_Idle);
-            }
-            else
-            {
-                m_IplayerState.StateMachine.ChangeState(m_IplayerState.State_AirIdle);
-            }
-        }
     }
 
     public override void FixedUpdate()

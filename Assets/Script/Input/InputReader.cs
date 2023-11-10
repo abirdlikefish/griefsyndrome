@@ -10,21 +10,9 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     public static InputReader Instance { get; private set; }
     private GameInput m_gameInput;
 
-    // public void Initialization()
-    // {
-    //     if(m_gameInput == null)
-    //     {
-    //         m_gameInput = new GameInput();
-    //         m_gameInput.GamePlay.SetCallbacks(this);
-    //         m_gameInput.UI.SetCallbacks(this);
-    //         UseGamePlayAction();
-    //     }
-    // }
-
-    // public InputReader()
     private void OnEnable()
     {
-        Debug.Log("scriptable object constructor");
+        Debug.Log("InputReader OnEnable");
         if(Instance == null)
         {
             Instance = this;

@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using System;
 
 public class Homura_AirIdle : PlayerStateBase
 {
     public Homura_AirIdle(PlayerBase playerBase) : base(playerBase)
     {
-        m_animationName.Add("Homura_airIdle");
+        // m_animationName.Add("Homura_airIdle");
     }
 
     public override void EnterState()
     {
         base.EnterState();
         m_IplayerState.IsChargeOver = false;
-        m_IplayerState.ActionLevel = 1;
-        m_IplayerComponent.animator.Play(m_animationName[0] );
+        m_IplayerState.JumpTimeLeft = Math.Clamp(m_IplayerState.JumpTimeLeft , 0 , HomuraIntelligence.Instance.maxJumpTime - 1);
+        m_IplayerState.ActionLevel = HomuraIntelligence.Instance.actionLevel_airIdle;
         m_IplayerState.IsAirIdle = true;
+        m_IplayerComponent.animator.Play(HomuraIntelligence.Instance.animationName_airIdle );
+        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.gravityScale;
     }
 
     public override void ExitState()

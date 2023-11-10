@@ -6,9 +6,11 @@ public class Homura_Jump : PlayerStateBase
 {
     public Homura_Jump(PlayerBase playerBase) : base(playerBase)
     {
-        m_animationName.Add("Homura_jump");
-        m_animationName.Add("Homura_Airjump");
+        // m_animationName.Add("Homura_jump");
+        // m_animationName.Add("Homura_Airjump");
     }
+
+    private bool isAirJump;
 
     public override void EnterState()
     {
@@ -16,20 +18,12 @@ public class Homura_Jump : PlayerStateBase
         m_IplayerState.JumpTimeLeft --;
         m_IplayerState.ActionTimeLeft = HomuraIntelligence.Instance.maxActionTime;
         m_IplayerState.IsChargeOver = false;
-        m_IplayerState.ActionLevel = 5;
+        m_IplayerState.ActionLevel = HomuraIntelligence.Instance.actionLevel_jump;
         m_IplayerState.IsJump = true;
-        if(m_IplayerState.IsOnGround)
-        {
-            m_animationNameIndex = 0;
-        }
-        else
-        {
-            m_animationNameIndex = 1;
-        }
-        m_IplayerComponent.animator.Play(m_animationName[m_animationNameIndex]);
-        
-        // m_IplayerComponent.rigidbody2D.velocity = new Vector2(m_IplayerState.MoveTrend , 5);
+        isAirJump = !m_IplayerState.IsOnGround;
+        m_IplayerComponent.animator.Play(isAirJump ? HomuraIntelligence.Instance.animationName_airJump : HomuraIntelligence.Instance.animationName_jump);
         m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.jumpSpeed + HomuraIntelligence.Instance.moveSpeed * m_IplayerState.MoveTrend;
+        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.gravityScale;
     }
 
     public override void ExitState()
@@ -40,7 +34,7 @@ public class Homura_Jump : PlayerStateBase
 
     public override void Update()
     {
-        if(m_IplayerComponent.animator.GetCurrentAnimatorStateInfo(0).IsName(m_animationName[m_animationNameIndex]) == false )
+        if(m_IplayerComponent.animator.GetCurrentAnimatorStateInfo(0).IsName(isAirJump ? HomuraIntelligence.Instance.animationName_airJump : HomuraIntelligence.Instance.animationName_jump) == false )
         {
             return;
         }

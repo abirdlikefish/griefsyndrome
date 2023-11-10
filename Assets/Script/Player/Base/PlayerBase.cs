@@ -82,6 +82,7 @@ public class PlayerBase : MonoBehaviour, IPlayerState , IPlayerComponent
 
     [SerializeField]
     protected bool m_isOnGround;
+    private float coyoteTime_last = -1; 
     public bool IsOnGround
     {
         get
@@ -95,15 +96,42 @@ public class PlayerBase : MonoBehaviour, IPlayerState , IPlayerComponent
                 mid = Physics2D.Raycast(midPosition , Vector2.down , 0.12f , layerMask);
                 if(mid)
                 {
+                    // coyoteTime_last = -1;
                     m_isOnGround = true;
                     return true;
                 }
             }
-            m_isOnGround = false;
-            return false;
+
+            if(coyoteTime_last > 0)
+            {
+                if( Time.time - coyoteTime_last < GlobalSetting.Instance.coyoteTime)
+                {
+                    m_isOnGround = true;
+                    return true;
+                }
+                else
+                {
+                    coyoteTime_last = -1;
+                    m_isOnGround = false;
+                    return false;
+                }
+            }
+
+            if( IsMove )
+            {
+                coyoteTime_last = Time.time;
+                m_isOnGround = true;
+                return true;
+            }
+            else
+            {
+                m_isOnGround = false;
+                return false;
+            }
         }
         set{}
     }
+    
 
     [SerializeField]
     protected bool m_isNearWall;
