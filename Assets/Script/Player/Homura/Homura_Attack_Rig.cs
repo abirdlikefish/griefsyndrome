@@ -19,8 +19,16 @@ public class Homura_Attack_Rig : PlayerStateBase
         m_IplayerState.ActionLevel = HomuraIntelligence.Instance.RPG.actionLevel;
         m_IplayerState.IsAttack_Rig = true;
         if(m_IplayerState.MoveTrend == 0){}
-        m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.RPG.beginSpeed * (m_IplayerState.IsFaceRig ? 1 : -1) ;
-        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.RPG.gravityScale;
+        m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.RPG.beginVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
+        // if(m_IplayerState.IsOnGround)
+        // {
+        //     m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.RPG.beginVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
+        // }
+        // else
+        // {
+        //     m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.RPG.beginVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
+        // }
+        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.RPG.gravityScaleMultiplier * HomuraIntelligence.Instance.gravityScale;
         m_IplayerComponent.animator.Play( m_IplayerState.IsOnGround ? HomuraIntelligence.Instance.RPG.animationName : HomuraIntelligence.Instance.RPG.animationName_air);
         m_IHomuraAnimationEvent.Fire += this.Fire;
     }
@@ -36,6 +44,7 @@ public class Homura_Attack_Rig : PlayerStateBase
 
     public void Fire()
     {
+        m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.RPG.recoilVelocity  * (m_IplayerState.IsFaceRig ? 1 : -1) ;
         Debug.Log("Fire");
     }
 
@@ -47,5 +56,18 @@ public class Homura_Attack_Rig : PlayerStateBase
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+        if(m_IplayerComponent.rigidbody2D.velocity.x != 0)
+        {
+            if(m_IplayerState.IsOnGround)
+            {
+                float dragSpeed = Mathf.Min( Mathf.Abs(m_IplayerComponent.rigidbody2D.velocity.x) , HomuraIntelligence.Instance.dragSpeed);
+                m_IplayerComponent.rigidbody2D.velocity += dragSpeed * Mathf.Sign(m_IplayerComponent.rigidbody2D.velocity.x) * Vector2.left ;
+            }
+            else   
+            {
+                float dragSpeed = Mathf.Min( Mathf.Abs(m_IplayerComponent.rigidbody2D.velocity.x) , HomuraIntelligence.Instance.dragSpeed_air);
+                m_IplayerComponent.rigidbody2D.velocity += dragSpeed * Mathf.Sign(m_IplayerComponent.rigidbody2D.velocity.x) * Vector2.left ;
+            }
+        }
     }
 }

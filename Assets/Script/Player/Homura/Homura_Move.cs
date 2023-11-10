@@ -14,12 +14,11 @@ public class Homura_Move : PlayerStateBase
         m_IplayerState.IsChargeOver = false;
         m_IplayerState.IsMove = true;
         m_IplayerState.ActionLevel = HomuraIntelligence.Instance.actionLevel_move;
-        // m_IplayerState.ActionLevel = 1;
         m_IplayerComponent.animator.Play(HomuraIntelligence.Instance.animationName_move );
-        // m_IplayerComponent.animator.Play(m_animationName[0]);
         m_IplayerState.JumpTimeLeft = HomuraIntelligence.Instance.maxJumpTime;
         m_IplayerState.ActionTimeLeft = HomuraIntelligence.Instance.maxActionTime;
-        m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.moveSpeed * m_IplayerState.MoveTrend;
+        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.gravityScale;
+        // m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.moveSpeed * m_IplayerState.MoveTrend;
     }
 
     public override void ExitState()
@@ -37,7 +36,7 @@ public class Homura_Move : PlayerStateBase
         }
         else if(m_IplayerState.MoveTrend == 0)
         {
-            m_IplayerComponent.rigidbody2D.velocity = Vector2.zero;
+            // m_IplayerComponent.rigidbody2D.velocity = Vector2.zero;
             m_IplayerState.StateMachine.ChangeState(m_IplayerState.State_Idle);
         }
     }
@@ -45,5 +44,8 @@ public class Homura_Move : PlayerStateBase
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+        float diffSpeed = HomuraIntelligence.Instance.maxSpeed * m_IplayerState.MoveTrend - m_IplayerComponent.rigidbody2D.velocity.x;
+        m_IplayerComponent.rigidbody2D.velocity += diffSpeed * HomuraIntelligence.Instance.diffSpeedMultiplier * Vector2.right;
+
     }
 }

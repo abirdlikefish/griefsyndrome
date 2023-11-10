@@ -20,8 +20,16 @@ public class Homura_Attack_Heavy : PlayerStateBase
         m_IplayerState.IsChargeOver = false;
         m_IplayerState.ActionLevel = HomuraIntelligence.Instance.minimi.actionLevel;
         m_IplayerState.IsAttack_Heavy = true;
-        m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.minimi.beginSpeed;
-        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.minimi.gravityScale;
+        m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.minimi.beginVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
+        // if(m_IplayerState.IsOnGround)
+        // {
+        //     m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.minimi.beginVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
+        // }
+        // else
+        // {
+        //     m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.minimi.beginVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
+        // }
+        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.minimi.gravityScaleMultiplier * HomuraIntelligence.Instance.gravityScale;
         m_IplayerComponent.animator.Play( m_IplayerState.IsOnGround ? HomuraIntelligence.Instance.minimi.animationName : HomuraIntelligence.Instance.minimi.animationName_air);
         shootMode = m_IplayerState.IsOnGround ? 0 : 1;
         m_IHomuraAnimationEvent.Fire += this.Fire;
@@ -40,16 +48,15 @@ public class Homura_Attack_Heavy : PlayerStateBase
     public override void Update()
     {
         base.Update();
-
     }
 
     public void Fire()
     {
         Debug.Log("Fire");
+        m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.minimi.recoilVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
     }
     public void ReShoot()
     {
-        // Debug.Log("ReShoot: " + shootMode.ToString());
         if(m_IplayerState.Combo < m_IplayerState.MaxCombo && !m_IplayerState.IsChargeOver)
         {
             m_IplayerComponent.animator.Play( shootMode == 0 ? HomuraIntelligence.Instance.minimi.animationName : HomuraIntelligence.Instance.minimi.animationName_air, 0 , 6.0f / m_frameCnt[shootMode]);
@@ -59,5 +66,18 @@ public class Homura_Attack_Heavy : PlayerStateBase
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+        if(m_IplayerComponent.rigidbody2D.velocity.x != 0)
+        {
+            if(m_IplayerState.IsOnGround)
+            {
+                float dragSpeed = Mathf.Min( Mathf.Abs(m_IplayerComponent.rigidbody2D.velocity.x) , HomuraIntelligence.Instance.dragSpeed);
+                m_IplayerComponent.rigidbody2D.velocity += dragSpeed * Mathf.Sign(m_IplayerComponent.rigidbody2D.velocity.x) * Vector2.left ;
+            }
+            else   
+            {
+                float dragSpeed = Mathf.Min( Mathf.Abs(m_IplayerComponent.rigidbody2D.velocity.x) , HomuraIntelligence.Instance.dragSpeed_air);
+                m_IplayerComponent.rigidbody2D.velocity += dragSpeed * Mathf.Sign(m_IplayerComponent.rigidbody2D.velocity.x) * Vector2.left ;
+            }
+        }
     }
 }

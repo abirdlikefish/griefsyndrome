@@ -18,12 +18,18 @@ public class Homura_Jump : PlayerStateBase
         m_IplayerState.JumpTimeLeft --;
         m_IplayerState.ActionTimeLeft = HomuraIntelligence.Instance.maxActionTime;
         m_IplayerState.IsChargeOver = false;
-        m_IplayerState.ActionLevel = HomuraIntelligence.Instance.actionLevel_jump;
+        // m_IplayerState.ActionLevel = HomuraIntelligence.Instance.actionLevel_jump;
+        m_IplayerState.ActionLevel = 1;
         m_IplayerState.IsJump = true;
         isAirJump = !m_IplayerState.IsOnGround;
         m_IplayerComponent.animator.Play(isAirJump ? HomuraIntelligence.Instance.animationName_airJump : HomuraIntelligence.Instance.animationName_jump);
-        m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.jumpSpeed + HomuraIntelligence.Instance.moveSpeed * m_IplayerState.MoveTrend;
         m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.gravityScale;
+        if(HomuraIntelligence.Instance.jumpSpeed > m_IplayerComponent.rigidbody2D.velocity.y)
+        {
+            m_IplayerComponent.rigidbody2D.velocity += Mathf.Max(HomuraIntelligence.Instance.jumpSpeed - m_IplayerComponent.rigidbody2D.velocity.y , HomuraIntelligence.Instance.jumpSpeed) * Vector2.up;
+        }
+        // m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.jumpSpeed * Vector2.up;
+        
     }
 
     public override void ExitState()
@@ -39,14 +45,6 @@ public class Homura_Jump : PlayerStateBase
             return;
         }
         base.Update();
-        if(m_IplayerComponent.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-        {
-            m_IplayerState.StateMachine.ChangeState(m_IplayerState.State_AirIdle);
-        }
-        if(m_IplayerComponent.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f / 4.0f)
-        {
-            m_IplayerState.ActionLevel = 1;
-        }
     }
 
     public override void FixedUpdate()
