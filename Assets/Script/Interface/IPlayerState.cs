@@ -44,6 +44,7 @@ public interface IPlayerState
     public bool IsAttack_Rig { get; set; }
     public bool IsAttack_Ultimate { get; set; }
     public bool IsDamage { get; set; }
+    public bool IsClimb { get; set; }
 
 // state
     public PlayerStateBase State_Idle { get; set; }
@@ -58,5 +59,6 @@ public interface IPlayerState
     public PlayerStateBase State_Attack_Rig { get; set; }
     public PlayerStateBase State_Attack_Ultimate { get; set; }
     public PlayerStateBase State_Damage { get; set; }
+    public PlayerStateBase State_Climb { get; set; }
 
 }

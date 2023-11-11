@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerBase : MonoBehaviour, IPlayerState , IPlayerComponent
+public class PlayerBase : MonoBehaviour, IPlayerState , IPlayerComponent , IHealth
 {
     [SerializeField]
     protected PlayerStateMachine m_stateMachine;
     public PlayerStateMachine StateMachine { get { return m_stateMachine; } set { m_stateMachine = value; } }
+
+// health
+    public virtual void BeHit(float damage)
+    {
+    }
 
 // parameter
     [SerializeField]
@@ -39,6 +44,11 @@ public class PlayerBase : MonoBehaviour, IPlayerState , IPlayerComponent
 
     [SerializeField]
     protected int m_moveTrend;
+
+    [SerializeField]
+    protected bool m_isInvincible ;
+    public bool IsInvincible { get { return m_isInvincible; } set { m_isInvincible = value;}}
+
     public int MoveTrend 
     {
         get 
@@ -89,11 +99,12 @@ public class PlayerBase : MonoBehaviour, IPlayerState , IPlayerComponent
         {
             RaycastHit2D mid ;
             float position_y = -0.4f;
-            LayerMask layerMask = (1 << 8);
-            for(float position_x = -0.15f ; position_x <= 0.15f ; position_x += 0.1f)
+            LayerMask layerMask_ground = (1 << 8);
+            for(float position_x = -0.12f ; position_x <= 0.12f ; position_x += 0.04f)
             {
-                Vector2 midPosition = new Vector2(position_x + transform.position.x , position_y + transform.position.y ) ;
-                mid = Physics2D.Raycast(midPosition , Vector2.down , 0.12f , layerMask);
+                Vector2 midPosition = new Vector2(position_x + transform.position.x + 0.05f * (IsFaceRig ? 1 : -1), position_y + transform.position.y ) ;
+                Debug.DrawLine(midPosition , midPosition + Vector2.down * 0.12f);
+                mid = Physics2D.Raycast(midPosition , Vector2.down , 0.12f , layerMask_ground);
                 if(mid)
                 {
                     // coyoteTime_last = -1;
@@ -183,6 +194,10 @@ public class PlayerBase : MonoBehaviour, IPlayerState , IPlayerComponent
     protected bool m_isDamage;
     public bool IsDamage {get { return m_isDamage;} set { m_isDamage = value; }}
 
+    [SerializeField]
+    protected bool m_isClimb;
+    public bool IsClimb {get { return m_isClimb;} set { m_isClimb = value; }}
+
 // state
     public PlayerStateBase State_Jump { get ; set ; }
     public PlayerStateBase State_Move { get ; set ; }
@@ -196,6 +211,7 @@ public class PlayerBase : MonoBehaviour, IPlayerState , IPlayerComponent
     public PlayerStateBase State_Damage { get ; set ; }
     public PlayerStateBase State_Idle { get ; set ; }
     public PlayerStateBase State_AirIdle { get ; set ; }
+    public PlayerStateBase State_Climb { get ; set ; }
 
 // component
     public Rigidbody2D rigidbody2D { get ; set ;  }
@@ -238,6 +254,7 @@ public class PlayerBase : MonoBehaviour, IPlayerState , IPlayerComponent
         m_isAttack_Rig = false;
         m_isAttack_Ultimate = false;
         m_isDamage = false;
+        m_isInvincible = false;
     }
     protected virtual void InitializeState()
     {
@@ -371,5 +388,4 @@ public class PlayerBase : MonoBehaviour, IPlayerState , IPlayerComponent
     {
         Debug.Log("Attack_Ultimate_CanceledEvent");
     }
-
 }

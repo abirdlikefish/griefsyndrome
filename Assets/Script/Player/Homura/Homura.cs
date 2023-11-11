@@ -1,12 +1,64 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Homura : PlayerBase , IHomuraAnimationEvent
+public class Homura : PlayerBase , IHomuraAnimationEvent , IHomuraDodge
 {
 
+// health
+    public override void BeHit(float damage)
+    {
+        if(IsInvincible)
+        {
+            return;
+        }
+        base.BeHit(damage);
+        StateMachine.ChangeState(State_Damage);
+    }
+
+// dodge
+    [SerializeField]
+    private bool isDodgeSucceeded ;
+    public bool IsDodgeSucceeded { get { return isDodgeSucceeded; } set { isDodgeSucceeded = value; } }  
+
+    [SerializeField]
+    public GameObject dodgeArea;
+    public GameObject DodgeArea { get { return dodgeArea; } set { dodgeArea = value; } }
+    private GameObject m_dodgeArea;
+
+    public void SetDodgeArea()
+    {
+        IsDodgeSucceeded = false;
+        IsInvincible = true;
+        m_dodgeArea = ObjectPool.Instance.getObject(dodgeArea);
+        if(m_dodgeArea == null)
+        {
+            Debug.LogWarning("m_dodgeArea is null");
+        }
+        m_dodgeArea.transform.position = transform.position;
+        m_dodgeArea.transform.localScale = transform.localScale ;
+        Homura_DodgeArea homura_DodgeArea = m_dodgeArea.GetComponent<Homura_DodgeArea>();
+        if(homura_DodgeArea == null)
+        {
+            Debug.LogWarning("homura_DodgeArea is null");
+        }
+        homura_DodgeArea.Initialization(this);
+        StartCoroutine("DodgeDetermine");
+    }
+    private IEnumerator DodgeDetermine()
+    {
+        float beginTime = Time.time;
+        while(Time.time - beginTime < HomuraIntelligence.Instance.invincibleTime)
+        {
+
+            yield return null;
+        }
+        ObjectPool.Instance.returnObject(m_dodgeArea);
+        IsInvincible = false;
+    }
 // initialization
 
     public override void Initialization()
@@ -20,6 +72,7 @@ public class Homura : PlayerBase , IHomuraAnimationEvent
         State_Idle = new Homura_Idle(this);
         State_Move = new Homura_Move(this);
         State_Damage = new Homura_Damage(this);
+        State_Climb = new Homura_Climb(this);
         State_AirIdle = new Homura_AirIdle(this);
         State_Attack_Up = new Homura_Attack_Up(this);
         State_Attack_Down = new Homura_Attack_Down(this);
@@ -35,7 +88,13 @@ public class Homura : PlayerBase , IHomuraAnimationEvent
         StateMachine = new PlayerStateMachine(this);
         StateMachine.Initialization(State_Idle);
     }
-// update
+
+    protected override void InitializeParameter()
+    {
+        base.InitializeParameter();
+
+    }
+    // update
     protected override void Update()
     {
         base.Update();

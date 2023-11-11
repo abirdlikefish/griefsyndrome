@@ -20,15 +20,8 @@ public class Homura_Attack_Heavy : PlayerStateBase
         m_IplayerState.IsChargeOver = false;
         m_IplayerState.ActionLevel = HomuraIntelligence.Instance.minimi.actionLevel;
         m_IplayerState.IsAttack_Heavy = true;
-        m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.minimi.beginVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
-        // if(m_IplayerState.IsOnGround)
-        // {
-        //     m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.minimi.beginVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
-        // }
-        // else
-        // {
-        //     m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.minimi.beginVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
-        // }
+        m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.minimi.beginVelocity.x * (m_IplayerState.IsFaceRig ? 1 : -1) * Vector2.right + HomuraIntelligence.Instance.minimi.beginVelocity.y * Vector2.up;
+        // m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.minimi.beginVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
         m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.minimi.gravityScaleMultiplier * HomuraIntelligence.Instance.gravityScale;
         m_IplayerComponent.animator.Play( m_IplayerState.IsOnGround ? HomuraIntelligence.Instance.minimi.animationName : HomuraIntelligence.Instance.minimi.animationName_air);
         shootMode = m_IplayerState.IsOnGround ? 0 : 1;
@@ -53,7 +46,8 @@ public class Homura_Attack_Heavy : PlayerStateBase
     public void Fire()
     {
         Debug.Log("Fire");
-        m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.minimi.recoilVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
+        m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.minimi.recoilVelocity.x * (m_IplayerState.IsFaceRig ? 1 : -1) * Vector2.right + HomuraIntelligence.Instance.minimi.recoilVelocity.y * Vector2.up;
+        // m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.minimi.recoilVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
     }
     public void ReShoot()
     {
@@ -77,6 +71,8 @@ public class Homura_Attack_Heavy : PlayerStateBase
             {
                 float dragSpeed = Mathf.Min( Mathf.Abs(m_IplayerComponent.rigidbody2D.velocity.x) , HomuraIntelligence.Instance.dragSpeed_air);
                 m_IplayerComponent.rigidbody2D.velocity += dragSpeed * Mathf.Sign(m_IplayerComponent.rigidbody2D.velocity.x) * Vector2.left ;
+        // float diffSpeed = - m_IplayerComponent.rigidbody2D.velocity.x;
+        // m_IplayerComponent.rigidbody2D.velocity += diffSpeed * HomuraIntelligence.Instance.dragSpeedMultiplier_air * Vector2.right;
             }
         }
     }

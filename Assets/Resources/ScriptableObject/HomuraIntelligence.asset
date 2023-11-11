@@ -23,7 +23,8 @@ MonoBehaviour:
   actionLevel_idle: 0
   animationName_idle: Homura_stand
   dragSpeed_air: 0.2
-  diffSpeedMultiplier_air: 0.3
+  dragSpeedMultiplier_air: 0.05
+  diffSpeedMultiplier_air: 0.2
   maxSpeed_air: 3
   gravityScaleMultiplier_drop: 1.5
   gravityScaleMultiplier_top: 0.5
@@ -34,6 +35,13 @@ MonoBehaviour:
   jumpHeight: 2
   animationName_jump: Homura_jump
   animationName_airJump: Homura_airJump
+  gravityScaleMultiplier_climb: 0
+  actionLevel_climb: 1
+  escapeSpeed: 3
+  animationName_climb: Homura_stand
+  invincibleTime: 0.5
+  actionLevel_damage: 6
+  animationName_damage: Homura_damage
   handgun:
     actionLevel: 2
     gravityScaleMultiplier: 0
@@ -44,7 +52,7 @@ MonoBehaviour:
     animationName_air: Homura_handGunAir
   RPG:
     actionLevel: 4
-    gravityScaleMultiplier: 0
+    gravityScaleMultiplier: 0.05
     maxCombo: 1
     beginVelocity: {x: 0, y: 0}
     recoilVelocity: {x: -5, y: 0}
@@ -52,10 +60,10 @@ MonoBehaviour:
     animationName_air: Homura_RPGair
   minimi:
     actionLevel: 3
-    gravityScaleMultiplier: 0.05
+    gravityScaleMultiplier: 0.01
     maxCombo: 10
     beginVelocity: {x: 0, y: 0}
-    recoilVelocity: {x: -0.1, y: 0}
+    recoilVelocity: {x: -2, y: 0}
     animationName: Homura_minimiB
     animationName_air: Homura_minimi
   mortar:
@@ -68,17 +76,17 @@ MonoBehaviour:
     animationName_air: Homura_mortar
   granade:
     actionLevel: 4
-    gravityScaleMultiplier: 1
+    gravityScaleMultiplier: 0.5
     maxCombo: 1
-    beginVelocity: {x: -2, y: 10}
+    beginVelocity: {x: -7, y: 5}
     recoilVelocity: {x: 0, y: 0}
     animationName: Homura_granade
     animationName_air: Homura_granadeAir
   granade_front:
     actionLevel: 4
-    gravityScaleMultiplier: 0
+    gravityScaleMultiplier: 0.5
     maxCombo: 1
-    beginVelocity: {x: 3, y: 3}
+    beginVelocity: {x: 5, y: 7}
     recoilVelocity: {x: 0, y: 0}
     animationName: Homura_granadeB
     animationName_air: Homura_granadeB

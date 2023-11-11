@@ -37,6 +37,7 @@ public class HomuraIntelligence : ScriptableObject
 
     [Header("airIdle")]
     public float dragSpeed_air = 0.0f;
+    public float dragSpeedMultiplier_air = 1;
     public float diffSpeedMultiplier_air = 1;
     public float maxSpeed_air = 1.0f;
     public float gravityScaleMultiplier_drop = 1;
@@ -51,6 +52,17 @@ public class HomuraIntelligence : ScriptableObject
     public float jumpSpeed { get{return math.sqrt(2 * gravityScale * Physics2D.gravity.y * -1 * jumpHeight) ;}}
     public string animationName_jump = "Homura_jump";
     public string animationName_airJump = "Homura_airJump";
+    
+    [Header("climb")]
+    public float gravityScaleMultiplier_climb = 0;
+    public int actionLevel_climb = 1;
+    public float escapeSpeed = 3;
+    public string animationName_climb = "Homura_stand";
+
+    [Header("damage")]
+    public float invincibleTime = 0.5f;
+    public int actionLevel_damage = 6;
+    public string animationName_damage = "Homura_damage";
 
 
     // level:

@@ -20,6 +20,7 @@ public class Homura_AirIdle : PlayerStateBase
         m_IplayerState.ActionLevel = HomuraIntelligence.Instance.actionLevel_airIdle;
         m_IplayerState.IsAirIdle = true;
         m_IplayerComponent.animator.Play(HomuraIntelligence.Instance.animationName_airIdle );
+        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.gravityScale;
         m_jumpStage = 0;
     }
 
@@ -36,11 +37,22 @@ public class Homura_AirIdle : PlayerStateBase
             if(m_IplayerState.MoveTrend == 0)
             {
                 m_IplayerState.StateMachine.ChangeState(m_IplayerState.State_Idle);
+                return;
             }
             else
             {
                 m_IplayerState.StateMachine.ChangeState(m_IplayerState.State_Move);
+                return;
             }
+        }
+        Debug.DrawLine(m_IplayerComponent.rigidbody2D.position + m_IplayerState.MoveTrend * Vector2.right * 0.2f + Vector2.down * 0.4f , m_IplayerComponent.rigidbody2D.position + m_IplayerState.MoveTrend * Vector2.right * 0.3f - Vector2.down * 0.4f  , Color.green);
+        LayerMask layerMask_ground = (1 << 8);
+        Collider2D midCollider2D = Physics2D.OverlapArea(m_IplayerComponent.rigidbody2D.position + m_IplayerState.MoveTrend * Vector2.right * 0.2f + Vector2.down * 0.4f , m_IplayerComponent.rigidbody2D.position + m_IplayerState.MoveTrend * Vector2.right * 0.3f - Vector2.down * 0.4f , layerMask_ground);
+        // RaycastHit2D midRaycastHit2D = Physics2D.Raycast(m_IplayerComponent.rigidbody2D.position + Vector2.up * 0.5f + m_IplayerState.MoveTrend * Vector2.right * 0.2f , m_IplayerState.MoveTrend * Vector2.right , 1 , layerMask_ground);
+        if(midCollider2D)
+        {
+            m_IplayerState.StateMachine.ChangeState(m_IplayerState.State_Climb);
+            return;
         }
         base.Update();
     }

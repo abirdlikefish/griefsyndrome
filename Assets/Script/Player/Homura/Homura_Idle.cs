@@ -36,6 +36,10 @@ public class Homura_Idle : PlayerStateBase
         {
             m_IplayerState.StateMachine.ChangeState(m_IplayerState.State_Move);
         }
+        if(!m_IplayerState.IsOnGround)
+        {
+            m_IplayerState.StateMachine.ChangeState(m_IplayerState.State_AirIdle);
+        }
     }
 
     public override void FixedUpdate()

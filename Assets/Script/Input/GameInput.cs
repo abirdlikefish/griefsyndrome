@@ -28,15 +28,6 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
             ""id"": ""41aa9e40-40c2-4624-9e9a-79a1c260c6ae"",
             ""actions"": [
                 {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""a2369099-6156-4aea-b193-afec1dda5128"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""92210b46-cf2e-4830-8737-d744595cd51b"",
@@ -55,18 +46,18 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Attack_Light"",
+                    ""name"": ""Attack_Ultimate"",
                     ""type"": ""Button"",
-                    ""id"": ""963bb1ce-7c0d-4653-b008-92e452bfaa3c"",
+                    ""id"": ""b197772b-f8cd-4978-a047-524e4f3f3cbf"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Attack_Heavy"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
-                    ""id"": ""b7f64f2e-6693-4c02-88a4-8df3d6427bb0"",
+                    ""id"": ""a2369099-6156-4aea-b193-afec1dda5128"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -109,9 +100,18 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Attack_Ultimate"",
+                    ""name"": ""Attack_Heavy"",
                     ""type"": ""Button"",
-                    ""id"": ""b197772b-f8cd-4978-a047-524e4f3f3cbf"",
+                    ""id"": ""b7f64f2e-6693-4c02-88a4-8df3d6427bb0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack_Light"",
+                    ""type"": ""Button"",
+                    ""id"": ""963bb1ce-7c0d-4653-b008-92e452bfaa3c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -119,17 +119,6 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""f5cce760-0f2b-4950-a025-575c101234a0"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""e25188ef-ae5e-4c78-81da-b92bd6232d60"",
@@ -182,17 +171,6 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""eb429d94-df35-410c-ba4a-c65493782e01"",
-                    ""path"": ""<Keyboard>/z"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack_Light"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -263,17 +241,6 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""ac15e4f0-56e3-4d99-8c5e-9d4eb4ccd4da"",
-                    ""path"": ""<Keyboard>/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack_Heavy"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""One Modifier"",
                     ""id"": ""d7d60c75-65c6-4dde-af39-eadbed4b651a"",
                     ""path"": ""OneModifier"",
@@ -307,17 +274,6 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""e5516c11-362a-4d63-9eec-a839f43e2ddc"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack_Ultimate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""One Modifier"",
                     ""id"": ""78d71beb-d7e7-49a3-b5f1-b5600c9d42a7"",
                     ""path"": ""OneModifier"",
@@ -349,6 +305,50 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""action"": ""Attack_Lef"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac15e4f0-56e3-4d99-8c5e-9d4eb4ccd4da"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack_Heavy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb429d94-df35-410c-ba4a-c65493782e01"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack_Light"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5516c11-362a-4d63-9eec-a839f43e2ddc"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack_Ultimate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f5cce760-0f2b-4950-a025-575c101234a0"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -396,16 +396,16 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
 }");
         // GamePlay
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
-        m_GamePlay_Jump = m_GamePlay.FindAction("Jump", throwIfNotFound: true);
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
         m_GamePlay_Pause = m_GamePlay.FindAction("Pause", throwIfNotFound: true);
-        m_GamePlay_Attack_Light = m_GamePlay.FindAction("Attack_Light", throwIfNotFound: true);
-        m_GamePlay_Attack_Heavy = m_GamePlay.FindAction("Attack_Heavy", throwIfNotFound: true);
+        m_GamePlay_Attack_Ultimate = m_GamePlay.FindAction("Attack_Ultimate", throwIfNotFound: true);
+        m_GamePlay_Jump = m_GamePlay.FindAction("Jump", throwIfNotFound: true);
         m_GamePlay_Attack_Up = m_GamePlay.FindAction("Attack_Up", throwIfNotFound: true);
         m_GamePlay_Attack_Down = m_GamePlay.FindAction("Attack_Down", throwIfNotFound: true);
         m_GamePlay_Attack_Lef = m_GamePlay.FindAction("Attack_Lef", throwIfNotFound: true);
         m_GamePlay_Attack_Rig = m_GamePlay.FindAction("Attack_Rig", throwIfNotFound: true);
-        m_GamePlay_Attack_Ultimate = m_GamePlay.FindAction("Attack_Ultimate", throwIfNotFound: true);
+        m_GamePlay_Attack_Heavy = m_GamePlay.FindAction("Attack_Heavy", throwIfNotFound: true);
+        m_GamePlay_Attack_Light = m_GamePlay.FindAction("Attack_Light", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Resume = m_UI.FindAction("Resume", throwIfNotFound: true);
@@ -468,30 +468,30 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     // GamePlay
     private readonly InputActionMap m_GamePlay;
     private IGamePlayActions m_GamePlayActionsCallbackInterface;
-    private readonly InputAction m_GamePlay_Jump;
     private readonly InputAction m_GamePlay_Move;
     private readonly InputAction m_GamePlay_Pause;
-    private readonly InputAction m_GamePlay_Attack_Light;
-    private readonly InputAction m_GamePlay_Attack_Heavy;
+    private readonly InputAction m_GamePlay_Attack_Ultimate;
+    private readonly InputAction m_GamePlay_Jump;
     private readonly InputAction m_GamePlay_Attack_Up;
     private readonly InputAction m_GamePlay_Attack_Down;
     private readonly InputAction m_GamePlay_Attack_Lef;
     private readonly InputAction m_GamePlay_Attack_Rig;
-    private readonly InputAction m_GamePlay_Attack_Ultimate;
+    private readonly InputAction m_GamePlay_Attack_Heavy;
+    private readonly InputAction m_GamePlay_Attack_Light;
     public struct GamePlayActions
     {
         private @GameInput m_Wrapper;
         public GamePlayActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Jump => m_Wrapper.m_GamePlay_Jump;
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
         public InputAction @Pause => m_Wrapper.m_GamePlay_Pause;
-        public InputAction @Attack_Light => m_Wrapper.m_GamePlay_Attack_Light;
-        public InputAction @Attack_Heavy => m_Wrapper.m_GamePlay_Attack_Heavy;
+        public InputAction @Attack_Ultimate => m_Wrapper.m_GamePlay_Attack_Ultimate;
+        public InputAction @Jump => m_Wrapper.m_GamePlay_Jump;
         public InputAction @Attack_Up => m_Wrapper.m_GamePlay_Attack_Up;
         public InputAction @Attack_Down => m_Wrapper.m_GamePlay_Attack_Down;
         public InputAction @Attack_Lef => m_Wrapper.m_GamePlay_Attack_Lef;
         public InputAction @Attack_Rig => m_Wrapper.m_GamePlay_Attack_Rig;
-        public InputAction @Attack_Ultimate => m_Wrapper.m_GamePlay_Attack_Ultimate;
+        public InputAction @Attack_Heavy => m_Wrapper.m_GamePlay_Attack_Heavy;
+        public InputAction @Attack_Light => m_Wrapper.m_GamePlay_Attack_Light;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -501,21 +501,18 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_GamePlayActionsCallbackInterface != null)
             {
-                @Jump.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
                 @Move.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
                 @Pause.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnPause;
-                @Attack_Light.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Light;
-                @Attack_Light.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Light;
-                @Attack_Light.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Light;
-                @Attack_Heavy.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Heavy;
-                @Attack_Heavy.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Heavy;
-                @Attack_Heavy.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Heavy;
+                @Attack_Ultimate.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Ultimate;
+                @Attack_Ultimate.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Ultimate;
+                @Attack_Ultimate.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Ultimate;
+                @Jump.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
                 @Attack_Up.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Up;
                 @Attack_Up.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Up;
                 @Attack_Up.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Up;
@@ -528,28 +525,28 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @Attack_Rig.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Rig;
                 @Attack_Rig.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Rig;
                 @Attack_Rig.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Rig;
-                @Attack_Ultimate.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Ultimate;
-                @Attack_Ultimate.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Ultimate;
-                @Attack_Ultimate.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Ultimate;
+                @Attack_Heavy.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Heavy;
+                @Attack_Heavy.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Heavy;
+                @Attack_Heavy.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Heavy;
+                @Attack_Light.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Light;
+                @Attack_Light.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Light;
+                @Attack_Light.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAttack_Light;
             }
             m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
-                @Attack_Light.started += instance.OnAttack_Light;
-                @Attack_Light.performed += instance.OnAttack_Light;
-                @Attack_Light.canceled += instance.OnAttack_Light;
-                @Attack_Heavy.started += instance.OnAttack_Heavy;
-                @Attack_Heavy.performed += instance.OnAttack_Heavy;
-                @Attack_Heavy.canceled += instance.OnAttack_Heavy;
+                @Attack_Ultimate.started += instance.OnAttack_Ultimate;
+                @Attack_Ultimate.performed += instance.OnAttack_Ultimate;
+                @Attack_Ultimate.canceled += instance.OnAttack_Ultimate;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
                 @Attack_Up.started += instance.OnAttack_Up;
                 @Attack_Up.performed += instance.OnAttack_Up;
                 @Attack_Up.canceled += instance.OnAttack_Up;
@@ -562,9 +559,12 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @Attack_Rig.started += instance.OnAttack_Rig;
                 @Attack_Rig.performed += instance.OnAttack_Rig;
                 @Attack_Rig.canceled += instance.OnAttack_Rig;
-                @Attack_Ultimate.started += instance.OnAttack_Ultimate;
-                @Attack_Ultimate.performed += instance.OnAttack_Ultimate;
-                @Attack_Ultimate.canceled += instance.OnAttack_Ultimate;
+                @Attack_Heavy.started += instance.OnAttack_Heavy;
+                @Attack_Heavy.performed += instance.OnAttack_Heavy;
+                @Attack_Heavy.canceled += instance.OnAttack_Heavy;
+                @Attack_Light.started += instance.OnAttack_Light;
+                @Attack_Light.performed += instance.OnAttack_Light;
+                @Attack_Light.canceled += instance.OnAttack_Light;
             }
         }
     }
@@ -604,16 +604,16 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     public UIActions @UI => new UIActions(this);
     public interface IGamePlayActions
     {
-        void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
-        void OnAttack_Light(InputAction.CallbackContext context);
-        void OnAttack_Heavy(InputAction.CallbackContext context);
+        void OnAttack_Ultimate(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
         void OnAttack_Up(InputAction.CallbackContext context);
         void OnAttack_Down(InputAction.CallbackContext context);
         void OnAttack_Lef(InputAction.CallbackContext context);
         void OnAttack_Rig(InputAction.CallbackContext context);
-        void OnAttack_Ultimate(InputAction.CallbackContext context);
+        void OnAttack_Heavy(InputAction.CallbackContext context);
+        void OnAttack_Light(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
