@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Homura_Attack_Lef : PlayerStateBase
 {
+    protected IHomuraBullet m_IHomuraBullet;
     protected IHomuraAnimationEvent m_IHomuraAnimationEvent;
     public Homura_Attack_Lef(PlayerBase playerBase) : base(playerBase)
     {
+        m_IHomuraBullet = playerBase as Homura;
         m_IHomuraAnimationEvent = playerBase as Homura;
     }
 
@@ -33,7 +35,7 @@ public class Homura_Attack_Lef : PlayerStateBase
         m_IplayerState.ActionTimeLeft --;
         m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.gravityScale;
         m_IHomuraAnimationEvent.Fire -= this.Fire;
-        m_IHomuraAnimationEvent.ReShoot += this.AfterFire;
+        m_IHomuraAnimationEvent.ReShoot -= this.AfterFire;
         base.ExitState();
     }
 
@@ -41,12 +43,13 @@ public class Homura_Attack_Lef : PlayerStateBase
     {
         m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.RPG.recoilVelocity.x * (m_IplayerState.IsFaceRig ? 1 : -1) * Vector2.right + HomuraIntelligence.Instance.RPG.recoilVelocity.y * Vector2.up;
         // m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.RPG.recoilVelocity  * (m_IplayerState.IsFaceRig ? 1 : -1) ;
+        m_IHomuraBullet.Fire_RPG();
         Debug.Log("Fire");
     }
 
     public void AfterFire()
     {
-
+        m_IHomuraBullet.Discard_RPG();
     }
 
     public override void Update()

@@ -5,7 +5,7 @@ using System.Data.Common;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Homura : PlayerBase , IHomuraAnimationEvent , IHomuraDodge
+public class Homura : PlayerBase , IHomuraAnimationEvent , IHomuraDodge , IHomuraBullet
 {
 
 // health
@@ -59,6 +59,123 @@ public class Homura : PlayerBase , IHomuraAnimationEvent , IHomuraDodge
         ObjectPool.Instance.returnObject(m_dodgeArea);
         IsInvincible = false;
     }
+// bullet
+    public GameObject m_RPG;
+    public GameObject m_minimi;
+    public GameObject m_minimiB;
+    public GameObject m_mortar;
+    public GameObject m_cartridge;
+    public GameObject m_bullet_handgun;
+    public GameObject m_bullet_minimi;
+    public GameObject m_bullet_RPG;
+    public GameObject m_bullet_grenade;
+    public void CreateCartridge_handgun()
+    {
+        GameObject midGameObject = ObjectPool.Instance.getObject(m_cartridge);
+        Rigidbody2D midrigidbody2D = midGameObject.GetComponent<Rigidbody2D>();
+        midGameObject.GetComponent<Disappear>().Initialization(HomuraIntelligence.Instance.cartridgeWaitTime , HomuraIntelligence.Instance.disappearTime);
+        midGameObject.transform.localScale = transform.localScale;
+        midGameObject.transform.position = new Vector2(HomuraIntelligence.Instance.discardPosition_cartridge_handgun.x * transform.localScale.x , HomuraIntelligence.Instance.discardPosition_cartridge_handgun.y) + rigidbody2D.position;
+        midrigidbody2D.velocity = new Vector2(HomuraIntelligence.Instance.discardVelocity_cartridge_handgun.x * transform.localScale.x , HomuraIntelligence.Instance.discardVelocity_cartridge_handgun.y);
+    }
+
+    public void CreateCartridge_minimi()
+    {
+        GameObject midGameObject = ObjectPool.Instance.getObject(m_cartridge);
+        Rigidbody2D midrigidbody2D = midGameObject.GetComponent<Rigidbody2D>();
+        midGameObject.GetComponent<Disappear>().Initialization(HomuraIntelligence.Instance.cartridgeWaitTime , HomuraIntelligence.Instance.disappearTime);
+        midGameObject.transform.localScale = transform.localScale;
+        midGameObject.transform.position = new Vector2(HomuraIntelligence.Instance.discardPosition_cartridge_minimi.x * transform.localScale.x , HomuraIntelligence.Instance.discardPosition_cartridge_minimi.y) + rigidbody2D.position;
+        midrigidbody2D.velocity = new Vector2(HomuraIntelligence.Instance.discardVelocity_cartridge_minimi.x * transform.localScale.x , HomuraIntelligence.Instance.discardVelocity_cartridge_minimi.y);
+    }
+
+    public void Discard_RPG()
+    {
+        GameObject midGameObject = ObjectPool.Instance.getObject(m_RPG);
+        Rigidbody2D midrigidbody2D = midGameObject.GetComponent<Rigidbody2D>();
+        midGameObject.GetComponent<Disappear>().Initialization(0 , HomuraIntelligence.Instance.disappearTime);
+        midGameObject.transform.localScale = transform.localScale;
+        midGameObject.transform.position = new Vector2(HomuraIntelligence.Instance.discardPosition_RPG.x * transform.localScale.x , HomuraIntelligence.Instance.discardPosition_RPG.y) + rigidbody2D.position;
+        midrigidbody2D.velocity = new Vector2(HomuraIntelligence.Instance.discardVelocity_RPG.x * transform.localScale.x , HomuraIntelligence.Instance.discardVelocity_RPG.y);
+    }
+
+    public void Discard_minimi()
+    {
+        GameObject midGameObject = ObjectPool.Instance.getObject(m_minimi);
+        Rigidbody2D midrigidbody2D = midGameObject.GetComponent<Rigidbody2D>();
+        midGameObject.GetComponent<Disappear>().Initialization(0 , HomuraIntelligence.Instance.disappearTime);
+        midGameObject.transform.localScale = transform.localScale;
+        midGameObject.transform.position = new Vector2(HomuraIntelligence.Instance.discardPosition_minimi.x * transform.localScale.x , HomuraIntelligence.Instance.discardPosition_minimi.y) + rigidbody2D.position;
+        midrigidbody2D.velocity = new Vector2(HomuraIntelligence.Instance.discardVelocity_minimi.x * transform.localScale.x , HomuraIntelligence.Instance.discardVelocity_minimi.y);
+    }
+
+    public void Discard_minimiB()
+    {
+        GameObject midGameObject = ObjectPool.Instance.getObject(m_minimiB);
+        Rigidbody2D midrigidbody2D = midGameObject.GetComponent<Rigidbody2D>();
+        midGameObject.GetComponent<Disappear>().Initialization(0 , HomuraIntelligence.Instance.disappearTime);
+        midGameObject.transform.localScale = transform.localScale;
+        midGameObject.transform.position = new Vector2(HomuraIntelligence.Instance.discardPosition_minimi.x * transform.localScale.x , HomuraIntelligence.Instance.discardPosition_minimi.y) + rigidbody2D.position;
+        midrigidbody2D.velocity = new Vector2(HomuraIntelligence.Instance.discardVelocity_minimi.x * transform.localScale.x , HomuraIntelligence.Instance.discardVelocity_minimi.y);
+    }
+
+    public void Fire_RPG()
+    {
+        // GameObject midGameObject = ObjectPool.Instance.getObject(m_bullet_RPG);
+        // Rigidbody2D midrigidbody2D = midGameObject.GetComponent<Rigidbody2D>();
+        // midGameObject.GetComponent<Bullet_RPG>().Initialization();
+        // midGameObject.transform.localScale = transform.localScale;
+        // midGameObject.transform.position = new Vector2(HomuraIntelligence.Instance.RPG.position.x * transform.localScale.x + transform.position.x , HomuraIntelligence.Instance.RPG.position.y + transform.position.y);
+        // midrigidbody2D.velocity = new Vector2(HomuraIntelligence.Instance.RPG.velocity.x * transform.localScale.x , HomuraIntelligence.Instance.RPG.velocity.y);
+    }
+
+    public void Fire_minimi()
+    {
+        // GameObject midGameObject = ObjectPool.Instance.getObject(m_bullet_minimi);
+        // Rigidbody2D midrigidbody2D = midGameObject.GetComponent<Rigidbody2D>();
+        // midGameObject.GetComponent<Bullet_Minimi>().Initialization();
+        // midGameObject.transform.localScale = transform.localScale;
+        // midGameObject.transform.position = new Vector2(HomuraIntelligence.Instance.minimi.position.x * transform.localScale.x + transform.position.x , HomuraIntelligence.Instance.minimi.position.y + transform.position.y);
+        // midrigidbody2D.velocity = new Vector2(HomuraIntelligence.Instance.minimi.velocity.x * transform.localScale.x , HomuraIntelligence.Instance.minimi.velocity.y);
+    }
+
+    public void Fire_handgun()
+    {
+        GameObject midGameObject = ObjectPool.Instance.getObject(m_bullet_handgun);
+        Rigidbody2D midrigidbody2D = midGameObject.GetComponent<Rigidbody2D>();
+        midGameObject.GetComponent<Bullet_Handgun>().Initialization();
+        midGameObject.transform.localScale = transform.localScale;
+        midGameObject.transform.position = new Vector2(HomuraIntelligence.Instance.handgun.position.x * transform.localScale.x + transform.position.x , HomuraIntelligence.Instance.handgun.position.y + transform.position.y);
+        midrigidbody2D.velocity = new Vector2(HomuraIntelligence.Instance.handgun.velocity.x * transform.localScale.x , HomuraIntelligence.Instance.handgun.velocity.y);
+    }
+    public void Fire_grenade()
+    {
+        // GameObject midGameObject = ObjectPool.Instance.getObject(m_bullet_grenade);
+        // Rigidbody2D midrigidbody2D = midGameObject.GetComponent<Rigidbody2D>();
+        // midGameObject.GetComponent<Bullet_Grenade>().Initialization();
+        // midGameObject.transform.localScale = transform.localScale;
+        // midGameObject.transform.position = new Vector2(HomuraIntelligence.Instance.grenade.position.x * transform.localScale.x + transform.position.x , HomuraIntelligence.Instance.grenade.position.y + transform.position.y);
+        // midrigidbody2D.velocity = new Vector2(HomuraIntelligence.Instance.grenade.velocity.x * transform.localScale.x , HomuraIntelligence.Instance.grenade.velocity.y);
+    }
+    public void Fire_grenade_front()
+    {
+        // GameObject midGameObject = ObjectPool.Instance.getObject(m_bullet_grenade);
+        // Rigidbody2D midrigidbody2D = midGameObject.GetComponent<Rigidbody2D>();
+        // midGameObject.GetComponent<Bullet_Grenade>().Initialization();
+        // midGameObject.transform.localScale = transform.localScale;
+        // midGameObject.transform.position = new Vector2(HomuraIntelligence.Instance.grenade_front.position.x * transform.localScale.x + transform.position.x , HomuraIntelligence.Instance.grenade_front.position.y + transform.position.y);
+        // midrigidbody2D.velocity = new Vector2(HomuraIntelligence.Instance.grenade_front.velocity.x * transform.localScale.x , HomuraIntelligence.Instance.grenade_front.velocity.y);
+    }
+
+
+    public void Place_mortar()
+    {
+        GameObject midGameObject = ObjectPool.Instance.getObject(m_mortar);
+        Rigidbody2D midrigidbody2D = midGameObject.GetComponent<Rigidbody2D>();
+        midGameObject.GetComponent<Homura_Mortar>().Initialization(HomuraIntelligence.Instance.mortarWaitTime);
+        midGameObject.transform.localScale = transform.localScale;
+        midGameObject.transform.position = new Vector2(HomuraIntelligence.Instance.mortar.position.x * transform.localScale.x , HomuraIntelligence.Instance.mortar.position.y) + rigidbody2D.position;
+    }
 // initialization
 
     public override void Initialization()
@@ -94,7 +211,7 @@ public class Homura : PlayerBase , IHomuraAnimationEvent , IHomuraDodge
         base.InitializeParameter();
 
     }
-    // update
+// update
     protected override void Update()
     {
         base.Update();

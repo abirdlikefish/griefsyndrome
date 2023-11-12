@@ -5,9 +5,11 @@ using UnityEngine;
 public class Homura_Attack_Ultimate : PlayerStateBase
 {
     protected IHomuraAnimationEvent m_IHomuraAnimationEvent;
+    protected IHomuraBullet m_IHomuraBullet;
     public Homura_Attack_Ultimate(PlayerBase playerBase) : base(playerBase)
     {
         m_IHomuraAnimationEvent = playerBase as Homura;
+        m_IHomuraBullet = playerBase as Homura;
     }
 
     public override void EnterState()

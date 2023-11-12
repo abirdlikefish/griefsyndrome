@@ -42,59 +42,90 @@ MonoBehaviour:
   invincibleTime: 0.5
   actionLevel_damage: 6
   animationName_damage: Homura_damage
+  disappearTime: 0.5
+  cartridgeWaitTime: 2
+  mortarWaitTime: 1
+  discardPosition_cartridge_handgun: {x: 0.23, y: 0.25}
+  discardPosition_cartridge_minimi: {x: 0, y: 0}
+  discardPosition_minimi: {x: 0, y: -0.2}
+  discardPosition_RPG: {x: -0.5, y: 0}
+  discardVelocity_minimi: {x: 0, y: 0}
+  discardVelocity_RPG: {x: -2, y: 1}
+  bulletPosition_mortar: {x: 0.3, y: 0.3}
   handgun:
     actionLevel: 2
     gravityScaleMultiplier: 0
     maxCombo: 5
+    bulletGravityScale: 0
     beginVelocity: {x: 0, y: 0}
     recoilVelocity: {x: 0, y: 0}
+    position: {x: 1, y: 0}
+    velocity: {x: 10, y: 0}
     animationName: Homura_handGun
     animationName_air: Homura_handGunAir
   RPG:
     actionLevel: 4
     gravityScaleMultiplier: 0.05
     maxCombo: 1
+    bulletGravityScale: 0
     beginVelocity: {x: 0, y: 0}
     recoilVelocity: {x: -5, y: 0}
+    position: {x: 0, y: 0}
+    velocity: {x: 5, y: 0}
     animationName: Homura_RPG
     animationName_air: Homura_RPGair
   minimi:
     actionLevel: 3
     gravityScaleMultiplier: 0.01
     maxCombo: 10
+    bulletGravityScale: 0
     beginVelocity: {x: 0, y: 0}
     recoilVelocity: {x: -2, y: 0}
+    position: {x: 0, y: 0}
+    velocity: {x: 5, y: 0}
     animationName: Homura_minimiB
     animationName_air: Homura_minimi
   mortar:
     actionLevel: 4
     gravityScaleMultiplier: 0
     maxCombo: 1
+    bulletGravityScale: 2
     beginVelocity: {x: 0, y: 0}
     recoilVelocity: {x: 0, y: 0}
+    position: {x: -1, y: 0}
+    velocity: {x: 5, y: 15}
     animationName: Homura_mortar
     animationName_air: Homura_mortar
   granade:
     actionLevel: 4
     gravityScaleMultiplier: 0.5
     maxCombo: 1
+    bulletGravityScale: 2
     beginVelocity: {x: -7, y: 5}
     recoilVelocity: {x: 0, y: 0}
+    position: {x: 0, y: 0}
+    velocity: {x: 5, y: 0}
     animationName: Homura_granade
     animationName_air: Homura_granadeAir
   granade_front:
     actionLevel: 4
     gravityScaleMultiplier: 0.5
     maxCombo: 1
+    bulletGravityScale: 1
     beginVelocity: {x: 5, y: 7}
     recoilVelocity: {x: 0, y: 0}
+    position: {x: 0, y: 0}
+    velocity: {x: 5, y: 0}
     animationName: Homura_granadeB
     animationName_air: Homura_granadeB
   timeFreeze:
     actionLevel: 5
     gravityScaleMultiplier: 0
     maxCombo: 1
+    bulletGravityScale: 0
     beginVelocity: {x: 0, y: 0}
     recoilVelocity: {x: 0, y: 0}
+    position: {x: 0, y: 0}
+    velocity: {x: 5, y: 0}
     animationName: Homura_mortar
     animationName_air: Homura_mortar

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Homura_granade
+  m_Name: Homura_grenadeB
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -20,25 +20,23 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 2f04c3eb7e5819545bd3f1b9baf1247a, type: 3}
+      value: {fileID: 21300000, guid: 85a63fdbe9955454a8b03ac98d3a6797, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: fe30da766e08b9940a2f44e9a6b151a4, type: 3}
+      value: {fileID: 21300000, guid: 622a83e6252674249b9062a374c62319, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 0debda7124eba1748979dcd6dc7b39e7, type: 3}
+      value: {fileID: 21300000, guid: ad71c4800d6d0e04b85c55535c98bc28, type: 3}
     - time: 0.25
-      value: {fileID: 21300000, guid: 7a6639c8aa6daf745b0a91fa516b0ef4, type: 3}
+      value: {fileID: 21300000, guid: 2ed9152bf51ecc447bb74030594ffcd8, type: 3}
     - time: 0.33333334
-      value: {fileID: 21300000, guid: 3a753b3b426218b43aa064192107608d, type: 3}
+      value: {fileID: 21300000, guid: 8aa09af49c1e14a41baf815a41e16ab7, type: 3}
     - time: 0.41666666
-      value: {fileID: 21300000, guid: aab3ca3cd97e7574387f6ff35401329a, type: 3}
+      value: {fileID: 21300000, guid: 55c957cc68817f14fa9145d8cbcbec77, type: 3}
     - time: 0.5
-      value: {fileID: 21300000, guid: d9c0485c0508f834698c00af4184bb28, type: 3}
+      value: {fileID: 21300000, guid: 3929a0dc40dcf174594b537aa6e75919, type: 3}
     - time: 0.5833333
-      value: {fileID: 21300000, guid: c0b01d4b0fdb8d44eafed7441e7ea27d, type: 3}
+      value: {fileID: 21300000, guid: 84968f1ede53b1749887659948c68de1, type: 3}
     - time: 0.6666667
-      value: {fileID: 21300000, guid: c3285c257942c1d478e6189bde8a2e6b, type: 3}
-    - time: 0.75
-      value: {fileID: 21300000, guid: 33e7688309edec842af5f10b26f7c83e, type: 3}
+      value: {fileID: 21300000, guid: 7246d6496da6b5a4cbb1f330b59acab9, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -58,22 +56,21 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 2f04c3eb7e5819545bd3f1b9baf1247a, type: 3}
-    - {fileID: 21300000, guid: fe30da766e08b9940a2f44e9a6b151a4, type: 3}
-    - {fileID: 21300000, guid: 0debda7124eba1748979dcd6dc7b39e7, type: 3}
-    - {fileID: 21300000, guid: 7a6639c8aa6daf745b0a91fa516b0ef4, type: 3}
-    - {fileID: 21300000, guid: 3a753b3b426218b43aa064192107608d, type: 3}
-    - {fileID: 21300000, guid: aab3ca3cd97e7574387f6ff35401329a, type: 3}
-    - {fileID: 21300000, guid: d9c0485c0508f834698c00af4184bb28, type: 3}
-    - {fileID: 21300000, guid: c0b01d4b0fdb8d44eafed7441e7ea27d, type: 3}
-    - {fileID: 21300000, guid: c3285c257942c1d478e6189bde8a2e6b, type: 3}
-    - {fileID: 21300000, guid: 33e7688309edec842af5f10b26f7c83e, type: 3}
+    - {fileID: 21300000, guid: 85a63fdbe9955454a8b03ac98d3a6797, type: 3}
+    - {fileID: 21300000, guid: 622a83e6252674249b9062a374c62319, type: 3}
+    - {fileID: 21300000, guid: ad71c4800d6d0e04b85c55535c98bc28, type: 3}
+    - {fileID: 21300000, guid: 2ed9152bf51ecc447bb74030594ffcd8, type: 3}
+    - {fileID: 21300000, guid: 8aa09af49c1e14a41baf815a41e16ab7, type: 3}
+    - {fileID: 21300000, guid: 55c957cc68817f14fa9145d8cbcbec77, type: 3}
+    - {fileID: 21300000, guid: 3929a0dc40dcf174594b537aa6e75919, type: 3}
+    - {fileID: 21300000, guid: 84968f1ede53b1749887659948c68de1, type: 3}
+    - {fileID: 21300000, guid: 7246d6496da6b5a4cbb1f330b59acab9, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.8333333
+    m_StopTime: 0.75
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -93,14 +90,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.5
+  - time: 0.16666667
     functionName: AnimationEvent_Fire
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.8333333
+  - time: 0.75
     functionName: AnimationEvent_End
     data: 
     objectReferenceParameter: {fileID: 0}

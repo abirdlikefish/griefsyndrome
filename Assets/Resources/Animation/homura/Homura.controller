@@ -33,7 +33,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Homura_granadeAir
+  m_Name: Homura_grenadeAir
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -437,7 +437,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Homura_granadeB
+  m_Name: Homura_grenadeB
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -515,7 +515,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Homura_granade
+  m_Name: Homura_grenade
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

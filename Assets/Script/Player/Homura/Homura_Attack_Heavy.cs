@@ -5,11 +5,13 @@ using UnityEngine;
 public class Homura_Attack_Heavy : PlayerStateBase
 {
     protected IHomuraAnimationEvent m_IHomuraAnimationEvent;
+    protected IHomuraBullet m_IHomuraBullet;
     private int shootMode ;
     private int[] m_frameCnt = {11 , 12};
     public Homura_Attack_Heavy(PlayerBase playerBase) : base(playerBase)
     {
         m_IHomuraAnimationEvent = playerBase as Homura;
+        m_IHomuraBullet = playerBase as Homura;
     }
 
     public override void EnterState()
@@ -35,6 +37,14 @@ public class Homura_Attack_Heavy : PlayerStateBase
         m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.gravityScale;
         m_IHomuraAnimationEvent.Fire -= this.Fire;
         m_IHomuraAnimationEvent.ReShoot -= this.ReShoot;
+        if(shootMode == 0)
+        {
+            m_IHomuraBullet.Discard_minimi();
+        }
+        else
+        {
+            m_IHomuraBullet.Discard_minimiB();
+        }
         base.ExitState();
     }
 
@@ -47,6 +57,8 @@ public class Homura_Attack_Heavy : PlayerStateBase
     {
         Debug.Log("Fire");
         m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.minimi.recoilVelocity.x * (m_IplayerState.IsFaceRig ? 1 : -1) * Vector2.right + HomuraIntelligence.Instance.minimi.recoilVelocity.y * Vector2.up;
+        m_IHomuraBullet.CreateCartridge_minimi();
+        m_IHomuraBullet.Fire_minimi();
         // m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.minimi.recoilVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
     }
     public void ReShoot()

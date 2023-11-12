@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Mathematics;
+// using Unity.Mathematics;
 using Unity.VisualScripting;
 using System;
 using UnityEditor.Timeline.Actions;
@@ -49,7 +49,7 @@ public class HomuraIntelligence : ScriptableObject
     [Header("jump")]
     public int actionLevel_jump = 5;
     public float jumpHeight = 4;
-    public float jumpSpeed { get{return math.sqrt(2 * gravityScale * Physics2D.gravity.y * -1 * jumpHeight) ;}}
+    public float jumpSpeed { get{return Mathf.Sqrt(2 * gravityScale * Physics2D.gravity.y * -1 * jumpHeight) ;}}
     public string animationName_jump = "Homura_jump";
     public string animationName_airJump = "Homura_airJump";
     
@@ -64,6 +64,24 @@ public class HomuraIntelligence : ScriptableObject
     public int actionLevel_damage = 6;
     public string animationName_damage = "Homura_damage";
 
+    [Header("bullet")]
+    public float disappearTime = 2;
+    public float cartridgeWaitTime = 2;
+    public float mortarWaitTime = 2;
+    public float gravityScale_mortar = 2;
+    
+    public Vector2 discardPosition_cartridge_handgun = new Vector2(0.23f , 0.25f);
+    public Vector2 discardPosition_cartridge_minimi = new Vector2(0 , 0);
+    public Vector2 discardPosition_minimi = new Vector2(0 , 0);
+    public Vector2 discardPosition_RPG = new Vector2(0 , 0);
+
+    public Vector2 discardVelocity_cartridge_handgun {get{return new Vector2(-UnityEngine.Random.Range(0.5f,1f) , UnityEngine.Random.Range(1f,1.5f)) ; }}
+    public Vector2 discardVelocity_cartridge_minimi {get{return new Vector2(-UnityEngine.Random.Range(0.5f,1f) , UnityEngine.Random.Range(1f,1.5f)) ; }}
+    public Vector2 discardVelocity_minimi = new Vector2(0,0);
+    public Vector2 discardVelocity_RPG = new Vector2(0,0);
+
+    public Vector2 bulletPosition_mortar = new Vector2(0,0);
+    
 
     // level:
     /*
@@ -81,29 +99,37 @@ public class HomuraIntelligence : ScriptableObject
         public int actionLevel;
         public float gravityScaleMultiplier;
         public int maxCombo;
+        public float bulletGravityScale;
         public Vector2 beginVelocity;
         public Vector2 recoilVelocity;
+        // public Vector2 discardPosition;
+        public Vector2 position;
+        public Vector2 velocity;
         public string animationName;
         public string animationName_air;
-        public Data( int actionLevel , float gravityScale, int maxCombo , Vector2 beginSpeed, Vector2 recoil , string animationName , string animationName_air)
+        public Data( int actionLevel , float gravityScale, int maxCombo , float bulletGravityScale , Vector2 beginSpeed, Vector2 recoil , Vector2 position , Vector2 velocity , string animationName , string animationName_air)
         {
             this.actionLevel = actionLevel;
             this.gravityScaleMultiplier = gravityScale;
             this.maxCombo = maxCombo;
+            this.bulletGravityScale = bulletGravityScale;
             this.beginVelocity = beginSpeed;
             this.recoilVelocity = recoil;
+            // this.discardPosition = discardPosition;
+            this.position = position;
+            this.velocity = velocity;
             this.animationName = animationName ;
             this.animationName_air = animationName_air;
         }
     }
 
     [SerializeField]
-    public Data handgun = new Data(2 , 1 , 5 ,new Vector2(0,0) , new Vector2(0,0) , "Homura_handGun" , "Homura_handGunAir");
-    public Data RPG = new Data(4 , 1 , 1 ,new Vector2(0,0) , new Vector2(-1,0) , "Homura_RPG" , "Homura_RPGair");
-    public Data minimi = new Data(3 , 0.1f , 10 ,new Vector2(0,0) , new Vector2(-0.1f,0) , "Homura_minimiB" , "Homura_minimi");
-    public Data mortar = new Data(4 , 1 , 1 , new Vector2(0,0) , new Vector2(0,0) , "Homura_mortar" , "Homura_mortar");
-    public Data granade = new Data(4 , 1 , 1 , new Vector2(-1,1) , new Vector2(0,0) , "Homura_granade" , "Homura_granadeAir");
-    public Data granade_front = new Data(4 , 1 , 1 , new Vector2(1,1) , new Vector2(0,0) , "Homura_granadeB" , "Homura_granadeB");
-    public Data timeFreeze = new Data(5 , 1 , 1 , new Vector2(0,0) , new Vector2(0,0) , "Homura_mortar" , "Homura_mortar");
+    public Data handgun = new Data(2 , 0 , 5 , 0 ,new Vector2(0,0) , new Vector2(0,0) , new Vector2(0,0) , new Vector2(5,0) , "Homura_handGun" , "Homura_handGunAir");
+    public Data RPG = new Data(4 , 0.05f , 1  , 0 ,new Vector2(0,0) , new Vector2(-5,0) , new Vector2(0,0) , new Vector2(5,0) , "Homura_RPG" , "Homura_RPGair");
+    public Data minimi = new Data(3 , 0.01f , 10 , 0 ,new Vector2(0,0) , new Vector2(-2f,0) , new Vector2(0,0) , new Vector2(5,0) , "Homura_minimiB" , "Homura_minimi");
+    public Data mortar = new Data(4 , 1 , 1 , 1 , new Vector2(0,0) , new Vector2(0,0) , new Vector2(0,0) , new Vector2(5,0) , "Homura_mortar" , "Homura_mortar");
+    public Data grenade = new Data(4 , 0.5f , 1 , 1 , new Vector2(-7,5) , new Vector2(0,0) , new Vector2(0,0) , new Vector2(5,0) , "Homura_grenade" , "Homura_grenadeAir");
+    public Data grenade_front = new Data(4 , 0.5f , 1 , 1 , new Vector2(5,5) , new Vector2(0,0) , new Vector2(0,0) , new Vector2(5,0) , "Homura_grenadeB" , "Homura_grenadeB");
+    public Data timeFreeze = new Data(5 , 0 , 1 , 0 , new Vector2(0,0) , new Vector2(0,0) , new Vector2(0,0) , new Vector2(5,0) , "Homura_mortar" , "Homura_mortar");
 
 }

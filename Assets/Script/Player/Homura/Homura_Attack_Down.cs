@@ -6,26 +6,28 @@ public class Homura_Attack_Down : PlayerStateBase
 {
     protected IHomuraAnimationEvent m_IHomuraAnimationEvent;
     protected IHomuraDodge m_IHomuraDodge;
+    protected IHomuraBullet m_IHomuraBullet;
     public Homura_Attack_Down(PlayerBase playerBase) : base(playerBase)
     {
         m_IHomuraAnimationEvent = playerBase as Homura;
         m_IHomuraDodge = playerBase as Homura;
+        m_IHomuraBullet = playerBase as Homura;
     }
 
     public override void EnterState()
     {
         base.EnterState();
         m_IplayerState.Combo = 1;
-        m_IplayerState.MaxCombo = HomuraIntelligence.Instance.granade.maxCombo;
+        m_IplayerState.MaxCombo = HomuraIntelligence.Instance.grenade.maxCombo;
         m_IplayerState.IsChargeOver = false;
-        m_IplayerState.ActionLevel = HomuraIntelligence.Instance.granade.actionLevel;
+        m_IplayerState.ActionLevel = HomuraIntelligence.Instance.grenade.actionLevel;
         m_IplayerState.IsAttack_Up = true;
         if(m_IplayerState.MoveTrend == 0){}
-        m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.granade.beginVelocity.x * (m_IplayerState.IsFaceRig ? 1 : -1) * Vector2.right + HomuraIntelligence.Instance.granade.beginVelocity.y * Vector2.up;
+        m_IplayerComponent.rigidbody2D.velocity = HomuraIntelligence.Instance.grenade.beginVelocity.x * (m_IplayerState.IsFaceRig ? 1 : -1) * Vector2.right + HomuraIntelligence.Instance.grenade.beginVelocity.y * Vector2.up;
 
-        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.granade.gravityScaleMultiplier * HomuraIntelligence.Instance.gravityScale;
-        // Debug.Log(m_IplayerState.IsOnGround ? HomuraIntelligence.Instance.granade.animationName : HomuraIntelligence.Instance.granade.animationName_air);
-        m_IplayerComponent.animator.Play( m_IplayerState.IsOnGround ? HomuraIntelligence.Instance.granade.animationName : HomuraIntelligence.Instance.granade.animationName_air);
+        m_IplayerComponent.rigidbody2D.gravityScale = HomuraIntelligence.Instance.grenade.gravityScaleMultiplier * HomuraIntelligence.Instance.gravityScale;
+        // Debug.Log(m_IplayerState.IsOnGround ? HomuraIntelligence.Instance.grenade.animationName : HomuraIntelligence.Instance.grenade.animationName_air);
+        m_IplayerComponent.animator.Play( m_IplayerState.IsOnGround ? HomuraIntelligence.Instance.grenade.animationName : HomuraIntelligence.Instance.grenade.animationName_air);
         m_IHomuraAnimationEvent.Fire += this.Fire;
         m_IHomuraDodge.SetDodgeArea();
     }
@@ -66,7 +68,8 @@ public class Homura_Attack_Down : PlayerStateBase
     public void Fire()
     {
         Debug.Log("Fire");
-        m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.granade.recoilVelocity.x * (m_IplayerState.IsFaceRig ? 1 : -1) * Vector2.right + HomuraIntelligence.Instance.granade.recoilVelocity.y * Vector2.up;
-        // m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.granade.recoilVelocity  * (m_IplayerState.IsFaceRig ? 1 : -1) ;
+        m_IHomuraBullet.Fire_grenade();
+        m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.grenade.recoilVelocity.x * (m_IplayerState.IsFaceRig ? 1 : -1) * Vector2.right + HomuraIntelligence.Instance.grenade.recoilVelocity.y * Vector2.up;
+        // m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.grenade.recoilVelocity  * (m_IplayerState.IsFaceRig ? 1 : -1) ;
     }
 }

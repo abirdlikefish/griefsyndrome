@@ -5,9 +5,11 @@ using UnityEngine;
 public class Homura_Attack_Light : PlayerStateBase
 {
     protected IHomuraAnimationEvent m_IHomuraAnimationEvent;
+    protected IHomuraBullet m_IHomuraBullet;
     public Homura_Attack_Light(PlayerBase playerBase) : base(playerBase)
     {
         m_IHomuraAnimationEvent = playerBase as Homura;
+        m_IHomuraBullet = playerBase as Homura;
     }
 
     public override void EnterState()
@@ -41,7 +43,7 @@ public class Homura_Attack_Light : PlayerStateBase
         if(m_IplayerState.PreInput && m_IplayerState.Combo < m_IplayerState.MaxCombo)
         {
             m_IplayerState.PreInput = false;
-            m_IplayerComponent.animator.Play( m_IplayerState.IsOnGround ? HomuraIntelligence.Instance.handgun.animationName : HomuraIntelligence.Instance.handgun.animationName_air, 0 , 2.0f / 8.0f);
+            m_IplayerComponent.animator.Play( m_IplayerState.IsOnGround ? HomuraIntelligence.Instance.handgun.animationName : HomuraIntelligence.Instance.handgun.animationName_air, 0 , 3.0f / 8.0f);
             m_IplayerState.Combo ++;
         }
     }
@@ -51,6 +53,8 @@ public class Homura_Attack_Light : PlayerStateBase
         Debug.Log("Fire");
         m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.handgun.recoilVelocity.x * (m_IplayerState.IsFaceRig ? 1 : -1) * Vector2.right + HomuraIntelligence.Instance.handgun.recoilVelocity.y * Vector2.up;
         // m_IplayerComponent.rigidbody2D.velocity += HomuraIntelligence.Instance.handgun.recoilVelocity * (m_IplayerState.IsFaceRig ? 1 : -1) ;
+        m_IHomuraBullet.CreateCartridge_handgun();
+        m_IHomuraBullet.Fire_handgun();
     }
 
     public override void Update()
